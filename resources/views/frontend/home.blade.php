@@ -1,4 +1,5 @@
-@extends('frontend.main')
+@extends('layouts.main')
+
 
 @section('content')
 
@@ -7,7 +8,10 @@
     <h2 class="fw-bold mt-2">Selamat datang di sistem informasi gereja</h2>
     <p>Akses warta jemaat, jadwal ibadah, dan pengumuman gereja dalam satu tempat</p>
     
-    <a class="btn btn-primary mt-3">Lihat Warta Jemaat</a>
+    <a href="{{ route('warta.index') }}" class="btn btn-primary mt-3">
+    Lihat Warta Jemaat
+</a>
+
     <a class="btn btn-warning mt-3">Jadwal Ibadah</a>
 </section>
 
@@ -23,7 +27,7 @@
                 <button class="btn btn-light border">Lihat</button>
             </div>
         </div>
-
+ 
         <div class="col-md-4">
             <div class="section-box">
                 <p>Data Warta berikutnya</p>
