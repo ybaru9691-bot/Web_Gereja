@@ -22,3 +22,15 @@ Route::get('/warta', [WartaController::class, 'index'])
 
 Route::get('/warta/{id}', [WartaController::class, 'show'])
     ->name('warta.show');
+route::get('/jadwal', function () {
+    return view('frontend.jadwal.index');
+})->name('jadwal');
+route::get('/pengumuman', function () {
+    return view('frontend.pengumuman.index');
+})->name('pengumuman');
+route::get('/tentang', function () {
+    return view('frontend.tentang.index');
+})->name('tentang');
+route::get('/contact', function () {
+    return view('frontend.contact.index');
+})->name('contact');

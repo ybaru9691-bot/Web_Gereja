@@ -1,0 +1,28 @@
+/* HERO */
+.hero {
+    background: #ececec;
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-weight: bold;
+}
+
+/* SECTION BOX */
+.section-box {
+    background: #f6f2f2;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+/* BUTTON */
+.btn-rounded {
+    border-radius: 30px;
+    padding: 8px 22px;
+}
+
+/* SPACING */
+.section {
+    margin-top: 60px;
+}

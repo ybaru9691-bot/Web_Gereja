@@ -1,0 +1,33 @@
+.pengumuman-page {
+    padding-bottom: 60px;
+}
+
+/* Pengumuman utama */
+.pengumuman-utama {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    position: relative;
+}
+
+/* Badge */
+.badge-pendeta {
+    background: #d6c56a;
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+/* Item list */
+.pengumuman-item {
+    background: #e3d59c;
+    padding: 18px;
+    border-radius: 14px;
+}
+
+.pengumuman-item p {
+    margin-bottom: 0;
+    color: #333;
+}

@@ -1,0 +1,20 @@
+/* =========================
+   JADWAL IBADAH
+========================= */
+
+.jadwal-page {
+    padding-bottom: 80px;
+}
+
+.jadwal-header {
+    background-color: #e2d59c;
+    font-weight: 600;
+}
+
+.jadwal-row {
+    background-color: #d6d6d6;
+}
+
+.jadwal-row:not(:last-child) {
+    margin-bottom: 10px;
+}

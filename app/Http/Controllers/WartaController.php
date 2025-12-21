@@ -18,4 +18,5 @@ class WartaController extends Controller
         $warta = Warta::findOrFail($id);
         return view('frontend.warta.show', compact('warta'));
     }
+    
 }

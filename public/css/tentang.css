@@ -1,0 +1,91 @@
+/* ===============================
+   TENTANG GEREJA
+================================ */
+
+.tentang-page {
+    background: linear-gradient(180deg, #f8f9ff, #ffffff);
+}
+
+/* Judul utama */
+.tentang-page h1 {
+    font-size: 2.4rem;
+    color: #2E42F0;
+}
+
+/* Subtitle */
+.tentang-page .lead {
+    color: #555;
+}
+
+/* Section umum */
+.tentang-section {
+    padding: 60px 0;
+}
+
+/* Card box */
+.tentang-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.tentang-card:hover {
+    transform: translateY(-6px);
+}
+
+/* Icon bulat */
+.tentang-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #2E42F0, #F2C94C);
+    color: #fff;
+    font-size: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Visi & Misi */
+.visi-misi {
+    background: #fdf6e3;
+}
+
+.visi-misi h4 {
+    color: #2E42F0;
+}
+
+/* Sejarah */
+.sejarah {
+    background: linear-gradient(135deg, #2E42F0, #6C7CFF);
+    color: #fff;
+}
+
+.sejarah p {
+    color: #f1f1f1;
+}
+
+/* Ayat */
+.ayat {
+    background: #fff4cc;
+    border-left: 6px solid #F2C94C;
+    padding: 25px;
+    border-radius: 12px;
+    font-style: italic;
+}
+
+/* Foto gereja */
+.gereja-img {
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tentang-page h1 {
+        font-size: 2rem;
+    }
+}

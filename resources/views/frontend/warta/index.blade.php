@@ -38,6 +38,7 @@
         <small class="text-muted">Menampilkan warta terakhir</small>
     </div>
 
+    @foreach ($wartas as $warta)
     {{-- CARD WARTA --}}
     <div class="p-4 rounded mt-3" style="background:#cbbf6a;">
         <div class="row align-items-center">
@@ -65,6 +66,7 @@
             </div>
         </div>
     </div>
+
 
     {{-- CARD WARTA 2 --}}
     <div class="p-4 rounded mt-3" style="background:#cbbf6a;">
@@ -96,5 +98,5 @@
     </div>
 
 </div>
-
+@endforeach
 @endsection

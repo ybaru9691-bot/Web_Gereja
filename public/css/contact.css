@@ -1,0 +1,41 @@
+/* ===============================
+   CONTACT PAGE
+================================ */
+
+.contact-page h1 {
+    font-size: 2.2rem;
+}
+
+.contact-page p {
+    font-size: 0.95rem;
+}
+
+/* Box kiri & kanan */
+.contact-page .shadow-sm {
+    border-radius: 16px;
+}
+
+/* Info gereja */
+.contact-page strong {
+    color: #333;
+}
+
+/* Form */
+.contact-page .form-control {
+    border-radius: 12px;
+}
+
+.contact-page textarea.form-control {
+    resize: none;
+}
+
+/* Button */
+.contact-page .btn-primary {
+    background-color: #2E42F0;
+    border: none;
+    padding: 8px 24px;
+}
+
+.contact-page .btn-primary:hover {
+    background-color: #1f2fd6;
+}
