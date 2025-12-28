@@ -1,0 +1,117 @@
+/* =========================
+   WARTA PAGE
+========================= */
+
+/* PAGE */
+.page-container {
+    padding: 20px;
+}
+
+/* HEADER */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* CARD */
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* TABLE */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead {
+    background: #fde6ef;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+    background: #fff4f8;
+}
+
+/* STATUS */
+.badge-published {
+    background: #6abf69;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+}
+
+.badge-draft {
+    background: #f2b705;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+}
+
+/* BUTTON */
+.btn-primary {
+    background: linear-gradient(135deg, #f08db3, #e56aa0);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 22px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: #f4f4f4;
+    color: #444;
+    padding: 10px 18px;
+    border-radius: 22px;
+    border: none;
+    cursor: pointer;
+}
+
+/* FORM */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* FORM ACTION */
+.form-action {
+    display: flex;
+    gap: 10px;
+}
+
+/* ACTION COLUMN */
+.action-cell {
+    display: flex;
+    gap: 8px;
+}

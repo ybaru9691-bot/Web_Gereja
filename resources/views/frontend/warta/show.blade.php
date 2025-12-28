@@ -2,75 +2,58 @@
 
 @section('content')
 
-<div class="container mt-5">
+<link rel="stylesheet" href="{{ asset('css/frontend/warta.css') }}">
 
-    {{-- BACK --}}
-    <a href="{{ route('warta.index') }}"
-       class="btn btn-warning rounded-pill mb-4">
-        ⬅ Kembali ke warta jemaat
-    </a>
+<div class="warta-detail-container">
+
+    {{-- FOTO WARTA --}}
+    @if($warta->file_path)
+        <div class="warta-image-wrapper">
+            <img src="{{ asset('storage/'.$warta->file_path) }}"
+                 alt="Foto Warta"
+                 class="warta-image">
+        </div>
+    @endif
 
     {{-- JUDUL --}}
-    <h2 class="fw-bold">
+    <h1 class="warta-title">
         {{ $warta->judul }}
-    </h2>
+    </h1>
 
-    <p class="text-muted">
+    {{-- TANGGAL --}}
+    <p class="warta-date">
         {{ \Carbon\Carbon::parse($warta->tanggal)->translatedFormat('l, d F Y') }}
-        · Disusun oleh {{ $warta->penyusun }}
     </p>
 
-    {{-- QR INFO --}}
-    <div class="d-flex align-items-center mb-3">
-        <span class="badge bg-warning me-2">&nbsp;</span>
-        <strong>Dibuka melalui QR Code</strong>
+    {{-- ISI --}}
+    <div class="warta-content">
+        {!! nl2br(e($warta->isi_warta)) !!}
     </div>
 
-    <small class="text-muted">
-        Menyimpan log scan untuk keperluan statistik dan pelaporan kehadiran
-    </small>
+    {{-- ACTION --}}
+    <div class="warta-action">
 
-    {{-- CONTENT --}}
-    <div class="row mt-4">
-
-        {{-- ISI WARTA (KERTAS) --}}
-        <div class="col-md-7">
-            <div class="warta-paper">
-                {!! nl2br(e($warta->isi_warta)) !!}
-            </div>
-        </div>
-
-   {{-- PDF --}}
-<div class="col-md-5">
-    <div class="pdf-box text-center">
-
-        {{-- PREVIEW PDF --}}
+        {{-- DOWNLOAD PDF --}}
         @if($warta->file_path)
-            <div class="pdf-preview mb-3">
-                <iframe
-                    src="{{ asset('storage/' . $warta->file_path) }}"
-                    width="100%"
-                    height="400"
-                    style="border:1px solid #ddd; border-radius:8px;">
-                </iframe>
-            </div>
-
-            <a href="{{ asset('storage/' . $warta->file_path) }}"
-               target="_blank"
-               class="btn btn-primary rounded-pill me-2">
-                Buka PDF
+            <a href="{{ asset('storage/'.$warta->file_path) }}"
+               class="btn-download"
+               download>
+                📄 Download Warta (PDF)
             </a>
+        @endif
 
-            <a href="{{ asset('storage/' . $warta->file_path) }}"
-               download
-               class="btn btn-light rounded-pill">
-                Unduh PDF
-            </a>
-
+        {{-- QR CODE --}}
+        @if($warta->qr_code)
+            <div class="qr-wrapper">
+                <img src="{{ asset('storage/'.$warta->qr_code) }}"
+                     alt="QR Code"
+                     class="qr-image">
+                <small>Scan untuk akses cepat</small>
             </div>
-        </div>
+        @endif
 
     </div>
+
 </div>
 
 @endsection

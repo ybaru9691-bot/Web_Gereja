@@ -2,16 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WartaJemaat extends Model
+class Warta extends Model
 {
-    use HasFactory;
-
-    protected $table = 'warta_jemaat'; // PENTING
-
-    protected $primaryKey = 'warta_id'; // PENTING
+    protected $table = 'warta';
+    protected $primaryKey = 'warta_id';
 
     protected $fillable = [
         'judul',
@@ -19,10 +15,7 @@ class WartaJemaat extends Model
         'isi_warta',
         'file_path',
         'qr_code',
-        'dibuat_oleh',
-    ];
-
-    protected $casts = [
-        'tanggal' => 'date',
+        'status',
+        'dibuat_oleh'
     ];
 }

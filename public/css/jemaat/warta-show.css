@@ -1,0 +1,64 @@
+.warta-detail-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #f8f6ee;
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.warta-image-wrapper {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.warta-image {
+    max-width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}
+
+.warta-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.warta-date {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.warta-content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+}
+
+.warta-action {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-download {
+    background: #2c6bed;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-download:hover {
+    background: #1f55c3;
+}
+
+.qr-wrapper {
+    text-align: center;
+}
+
+.qr-image {
+    width: 120px;
+    margin-bottom: 5px;
+}

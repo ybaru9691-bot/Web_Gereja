@@ -1,0 +1,65 @@
+/* ===============================
+   WARNA UTAMA DESAIN
+================================ */
+:root {
+    --gold: #cbbf6a;
+    --soft-gray: #d6cfcf;
+    --dark: #2e2e2e;
+}
+
+/* ===============================
+   JUDUL HALAMAN
+================================ */
+.warta-title {
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.warta-subtitle {
+    color: #6c757d;
+}
+
+/* ===============================
+   FILTER
+================================ */
+.warta-filter {
+    background: var(--soft-gray);
+    border-radius: 12px;
+}
+
+/* ===============================
+   CARD WARTA
+================================ */
+.warta-card {
+    background: var(--gold);
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+.warta-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.warta-ringkasan {
+    background: #fff;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+.btn-warta {
+    background: #0d6efd;
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 24px;
+}
+
+.btn-warta:hover {
+    background: #0b5ed7;
+    color: #fff;
+}

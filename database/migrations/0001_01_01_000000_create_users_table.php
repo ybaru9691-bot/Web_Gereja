@@ -12,8 +12,9 @@ return new class extends Migration
             $table->id();
             
             // Tambahan dari kamu
-            $table->string('nama')->nullable(); 
-            $table->enum('role', ['admin', 'pendeta', 'jemaat'])->default('jemaat');
+          $table->string('nama'); // nama asli
+    $table->string('username')->unique(); // untuk login
+    $table->enum('role', ['admin', 'pendeta', 'jemaat'])->default('jemaat');
 
             // Default Laravel
             $table->string('name')->nullable(); 
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
