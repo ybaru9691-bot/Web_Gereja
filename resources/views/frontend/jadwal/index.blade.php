@@ -5,7 +5,7 @@
 <div class="container mt-5 jadwal-page">
 
     {{-- JUDUL --}}
-    <h1 class="fw-bold">Jadwal ibadah mingguan</h1>
+    <h1 class="fw-bold">Jadwal Ibadah Mingguan</h1>
     <p class="text-muted">
         Lihat serangkaian jam dan ibadah minggu ini beserta jam dan lokasinya
     </p>

@@ -4,8 +4,8 @@
 @section('content')
 
 <section class="hero text-center">
-    <h4 class="fw-bold">Portal informasi jemaat</h4>
-    <h2 class="fw-bold mt-2">Selamat datang di sistem informasi gereja</h2>
+    <h4 class="fw-bold">Portal Informasi Jemaat</h4>
+    <h2 class="fw-bold mt-2">Selamat Datang di Sistem Informasi Gereja</h2>
     <p>Akses warta jemaat, jadwal ibadah, dan pengumuman gereja dalam satu tempat</p>
     
     <a href="{{ route('warta.index') }}" class="btn btn-primary mt-3">
@@ -16,32 +16,7 @@
 </section>
 
 <div class="container mt-5">
-    <h4 class="fw-bold">Warta Jemaat Terbaru</h4>
-    <p>Informasi terkini bagi seluruh jemaat</p>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="section-box">
-                <h6>Minggu 23 Nov 2025</h6>
-                <p>Ibadah syukur & perjamuan kudus</p>
-                <button class="btn btn-light border">Lihat</button>
-            </div>
-        </div>
- 
-        <div class="col-md-4">
-            <div class="section-box">
-                <p>Data Warta berikutnya</p>
-                <button class="btn btn-light border">Lihat</button>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="section-box">
-                <p>Data Warta berikutnya</p>
-                <button class="btn btn-light border">Lihat</button>
-            </div>
-        </div>
-    </div>
+    
 
     <h4 class="fw-bold mt-5">Jadwal ibadah minggu ini</h4>
 

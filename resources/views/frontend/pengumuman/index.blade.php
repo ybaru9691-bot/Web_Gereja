@@ -6,7 +6,7 @@
 <div class="container mt-5 pengumuman-page">
 
     {{-- JUDUL --}}
-    <h1 class="fw-bold">Pengumuman jemaat</h1>
+    <h1 class="fw-bold">Pengumuman Jemaat</h1>
     <p class="text-muted">
         Informasi terbaru dari pendeta dan majelis untuk seluruh jemaat
     </p>
@@ -25,7 +25,7 @@
     </div>
 
     {{-- SUB JUDUL --}}
-    <h5 class="fw-bold mt-5">Pengumuman terbaru</h5>
+    <h5 class="fw-bold mt-5">Pengumuman Terbaru</h5>
 
     {{-- LIST PENGUMUMAN --}}
     <div class="pengumuman-item mt-3">

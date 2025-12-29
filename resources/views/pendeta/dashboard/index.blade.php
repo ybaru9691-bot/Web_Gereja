@@ -8,6 +8,11 @@
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    {{-- CSS Admin --}}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/data.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/tambah.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/admin/warta.css') }}">
     
 </head>
 <body style="background:#f5f5f5">

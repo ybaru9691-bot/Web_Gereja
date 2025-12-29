@@ -58,7 +58,7 @@ Route::get('/admin/dashboard', function () {
 })->name('admin.dashboard');
 
 Route::get('/pendeta/dashboard', function () {
-    return view('pendeta.dashboard');
+    return view('pendeta.dashboard.index');
 })->name('pendeta.dashboard');
 
 /*
@@ -88,3 +88,8 @@ Route::prefix('admin')->group(function () {
     
 });
 
+/*
+|--------------------------------------------------------------------------
+| PENDETA
+|--------------------------------------------------------------------------
+*/

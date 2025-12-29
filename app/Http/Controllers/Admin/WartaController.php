@@ -55,24 +55,7 @@ if ($request->hasFile('foto')) {
             'status'      => $request->status,
             'dibuat_oleh' => auth()->id() ?? 1,
         ]);
-        // 🔥 URL DETAIL WARTA
-    $url = route('warta.show', $warta->id);
-
-    // 🔥 NAMA FILE QR
-    $qrName = 'qr-warta-' . $warta->id . '.png';
-
-    // 🔥 GENERATE QR
-    $qrImage = QrCode::format('png')
-        ->size(300)
-        ->generate($url);
-
-    // 🔥 SIMPAN KE STORAGE
-    Storage::disk('public')->put('qr/' . $qrName, $qrImage);
-
-    // 🔥 SIMPAN PATH QR
-    $warta->update([
-        'qr_code' => 'qr/' . $qrName
-    ]);
+       
 
         return redirect('/admin/warta')
             ->with('success', 'Warta berhasil disimpan');
