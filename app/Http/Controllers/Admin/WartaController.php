@@ -58,31 +58,24 @@ class WartaController extends Controller
             'status'      => $request->status,
             'dibuat_oleh' => auth()->id() ?? 1,
         ]);
+        // 🔥 URL DETAIL WARTA
+    $url = route('warta.show', $warta->id);
 
-        // 🔥 URL DETAIL WARTA (UNTUK QR)
-        $url = url('/warta/' . $warta->id);
+    // 🔥 NAMA FILE QR
+    $qrName = 'qr-warta-' . $warta->id . '.png';
 
-        // 🔥 NAMA FILE QR
-        $qrName = 'qr-warta-' . $warta->id . '.png';
+    // 🔥 GENERATE QR
+    $qrImage = QrCode::format('png')
+        ->size(300)
+        ->generate($url);
 
-        // 🔥 GENERATE QR CODE (ENDROID v6 - TANPA IMAGICK)
-        $builder = new Builder(
-            writer: new PngWriter(),
-            data: $url,
-            size: 300,
-            margin: 10
-        );
+    // 🔥 SIMPAN KE STORAGE
+    Storage::disk('public')->put('qr/' . $qrName, $qrImage);
 
-        $result  = $builder->build();
-        $qrImage = $result->getString();
-
-        // 🔥 SIMPAN QR KE STORAGE
-        Storage::disk('public')->put('qr/' . $qrName, $qrImage);
-
-        // 🔥 SIMPAN PATH QR KE DATABASE
-        $warta->update([
-            'qr_code' => 'qr/' . $qrName
-        ]);
+    // 🔥 SIMPAN PATH QR
+    $warta->update([
+        'qr_code' => 'qr/' . $qrName
+    ]);
 
         return redirect('/admin/warta')
             ->with('success', 'Warta berhasil disimpan');

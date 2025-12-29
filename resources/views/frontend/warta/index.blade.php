@@ -5,7 +5,7 @@
 <div class="container mt-5">
 
     {{-- JUDUL --}}
-    <h1 class="fw-bold">Daftar warta jemaat</h1>
+    <h1 class="fw-bold">Daftar Warta Jemaat</h1>
     <p class="text-muted">
         Lihat rangkuman warta mingguan gereja dan akses detail setiap ibadah
     </p>
@@ -33,7 +33,7 @@
 
     {{-- SUB JUDUL --}}
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <h4 class="fw-bold">Warta mingguan</h4>
+        <h4 class="fw-bold">Warta Mingguan</h4>
         <small class="text-muted">Menampilkan warta terbaru</small>
     </div>
 
