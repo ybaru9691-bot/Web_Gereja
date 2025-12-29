@@ -19,6 +19,8 @@
                     <th>Judul</th>
                     <th>Tanggal</th>
                     <th>Status</th>
+                    <th>QR</th>
+
                     <th style="width:120px">Aksi</th>
                 </tr>
             </thead>
@@ -34,6 +36,16 @@
                             @else
                                 <span class="badge-draft">Draft</span>
                             @endif
+
+                             @if($w->qr_code)
+        <img 
+            src="{{ asset('storage/qr/' . $w->qr_code) }}"
+            width="80"
+            alt="QR Warta"
+        >
+    @else
+        <small>Belum ada</small>
+    @endif
                         </td>
 
 

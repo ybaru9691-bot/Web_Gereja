@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Warta;
+
+// ✅ ENDROID QR CODE (VERSI BENAR)
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Writer\PngWriter;
 
 class WartaController extends Controller
 {
@@ -25,8 +30,6 @@ class WartaController extends Controller
         return view('admin.warta.create');
     }
 
-    
-
     /**
      * Simpan warta (draft / published)
      */
@@ -37,17 +40,17 @@ class WartaController extends Controller
             'tanggal'   => 'required|date',
             'isi_warta' => 'required',
             'status'    => 'required|in:draft,published',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-
+            'foto'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
+        // 🔹 SIMPAN FOTO (JIKA ADA)
+        $path = null;
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('warta', 'public');
+        }
 
-$path = null;
-
-if ($request->hasFile('foto')) {
-    $path = $request->file('foto')->store('warta', 'public');
-}
-            Warta::create([
+        // 🔹 SIMPAN DATA WARTA
+        $warta = Warta::create([
             'judul'       => $request->judul,
             'tanggal'     => $request->tanggal,
             'isi_warta'   => $request->isi_warta,
@@ -55,24 +58,31 @@ if ($request->hasFile('foto')) {
             'status'      => $request->status,
             'dibuat_oleh' => auth()->id() ?? 1,
         ]);
-        // 🔥 URL DETAIL WARTA
-    $url = route('warta.show', $warta->id);
 
-    // 🔥 NAMA FILE QR
-    $qrName = 'qr-warta-' . $warta->id . '.png';
+        // 🔥 URL DETAIL WARTA (UNTUK QR)
+        $url = url('/warta/' . $warta->id);
 
-    // 🔥 GENERATE QR
-    $qrImage = QrCode::format('png')
-        ->size(300)
-        ->generate($url);
+        // 🔥 NAMA FILE QR
+        $qrName = 'qr-warta-' . $warta->id . '.png';
 
-    // 🔥 SIMPAN KE STORAGE
-    Storage::disk('public')->put('qr/' . $qrName, $qrImage);
+        // 🔥 GENERATE QR CODE (ENDROID v6 - TANPA IMAGICK)
+        $builder = new Builder(
+            writer: new PngWriter(),
+            data: $url,
+            size: 300,
+            margin: 10
+        );
 
-    // 🔥 SIMPAN PATH QR
-    $warta->update([
-        'qr_code' => 'qr/' . $qrName
-    ]);
+        $result  = $builder->build();
+        $qrImage = $result->getString();
+
+        // 🔥 SIMPAN QR KE STORAGE
+        Storage::disk('public')->put('qr/' . $qrName, $qrImage);
+
+        // 🔥 SIMPAN PATH QR KE DATABASE
+        $warta->update([
+            'qr_code' => 'qr/' . $qrName
+        ]);
 
         return redirect('/admin/warta')
             ->with('success', 'Warta berhasil disimpan');
