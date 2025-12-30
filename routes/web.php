@@ -93,3 +93,10 @@ Route::prefix('admin')->group(function () {
 | PENDETA
 |--------------------------------------------------------------------------
 */
+Route::get('/pendeta/keuangan', function () {
+    return view('pendeta.keuangan.index');
+})->name('pendeta.keuangan');
+
+Route::get('/pendeta/pengumuman', function () {
+    return view('pendeta.pengumuman.index');
+})->name('pendeta.pengumuman');
