@@ -11,6 +11,7 @@ use App\Models\Warta;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\PngWriter;
 
+
 class WartaController extends Controller
 {
     /**
@@ -58,24 +59,31 @@ class WartaController extends Controller
             'status'      => $request->status,
             'dibuat_oleh' => auth()->id() ?? 1,
         ]);
-        // 🔥 URL DETAIL WARTA
-    $url = route('warta.show', $warta->id);
+        
+       // 🔥 URL DETAIL WARTA
+$url = route('warta.show', ['id' => $warta->warta_id]);
 
-    // 🔥 NAMA FILE QR
-    $qrName = 'qr-warta-' . $warta->id . '.png';
+// 🔥 NAMA FILE QR
+$qrName = 'qr-warta-' . $warta->warta_id . '.png';
 
-    // 🔥 GENERATE QR
-    $qrImage = QrCode::format('png')
-        ->size(300)
-        ->generate($url);
+// 🔥 GENERATE QR (ENDROID FIX 100%)
+$result = new Builder(
+    writer: new PngWriter(),
+    data: $url,
+    size: 300,
+    margin: 10
+);
 
-    // 🔥 SIMPAN KE STORAGE
-    Storage::disk('public')->put('qr/' . $qrName, $qrImage);
+// 🔥 SIMPAN KE storage/app/public/qr
+Storage::disk('public')->put(
+    'qr/' . $qrName,
+    $result->build()->getString()
+);
 
-    // 🔥 SIMPAN PATH QR
-    $warta->update([
-        'qr_code' => 'qr/' . $qrName
-    ]);
+// 🔥 SIMPAN PATH QR KE DB
+$warta->update([
+    'qr_code' => 'qr/' . $qrName
+]);
 
         return redirect('/admin/warta')
             ->with('success', 'Warta berhasil disimpan');
