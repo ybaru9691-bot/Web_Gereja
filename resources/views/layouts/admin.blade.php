@@ -32,23 +32,19 @@
         </div>
 
         <ul class="nav flex-column gap-2">
-            <li><a href="/admin/dashboard" class="nav-link active" title="Dashboard">📊 Dashboard</a></li>
-            <li><a href="/admin/jemaat" class="nav-link" title="Data Jemaat">👥 Data Jemaat</a></li>
-            <li><a href="/admin/warta" class="nav-link" title="Warta Jemaat">📰 Warta Jemaat</a></li>
-            <li><a href="#" class="nav-link" title="Jadwal Ibadah">📅 Jadwal Ibadah</a></li>
-            <li><a href="#" class="nav-link" title="Scan Log">🔍 Scan Log</a></li>
-            <li><a href="#" class="nav-link" title="Analisis Jemaat">📈 Analisis Jemaat</a></li>
-            <li><a href="#" class="nav-link" title="Keuangan">💰 Keuangan</a></li>
-            <li>
-                <a href="{{ route('logout') }}"
-                   class="nav-link text-danger"
-                   title="Logout"
-                   onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();">
-                   🚪 Logout
-                </a>
 
-                <form id="logout-form-admin" action="{{ route('logout') }}" method="POST" class="d-none">
+
+            <li><a href="/admin/dashboard" class="nav-link active">Dashboard</a></li>
+            <li><a href="/admin/jemaat" class="nav-link">Data Jemaat</a></li>
+            <li><a href="/admin/warta" class="nav-link">Warta Jemaat</a></li>
+            <li><a href="/admin/jadwal-ibadah" class="nav-link">Jadwal Ibadah</a></li>
+            <li><a href="#" class="nav-link">Scan Log</a></li>
+            <li><a href="#" class="nav-link">Analisis Jemaat</a></li>
+            <li><a href="#" class="nav-link">Keuangan</a></li>
+            <li class="mt-3">
+                <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
+                    <button type="submit" class="btn btn-link nav-link text-danger p-0" style="text-decoration:none;">Logout</button>
                 </form>
             </li>
         </ul>

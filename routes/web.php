@@ -5,8 +5,14 @@ use App\Http\Controllers\WartaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\JemaatController;
 use App\Http\Controllers\Admin\WartaController as AdminWartaController;
+
 use App\Http\Controllers\Pendeta\PengumumanController as PendetaPengumumanController;
 use App\Models\Pengumuman;
+
+use App\Http\Controllers\Admin\JadwalIbadahController;
+  use App\Http\Controllers\JadwalController;
+
+
 
 
 /*
@@ -34,10 +40,12 @@ Route::get('/warta', [WartaController::class, 'index'])
 
 Route::get('/warta/{id}', [WartaController::class, 'show'])
     ->name('warta.show');
-
-Route::get('/jadwal', function () {
-    return view('frontend.jadwal.index');
-})->name('jadwal');
+ 
+Route::get('/jadwal', [JadwalController::class, 'index'])
+    ->name('jadwal');
+    
+Route::get('/jadwal/{id}', [JadwalController::class, 'show'])
+    ->name('jadwal.show');
 
 Route::get('/pengumuman', function () {
     $pengumuman = Pengumuman::latest('created_at')->get();
@@ -88,7 +96,18 @@ Route::prefix('admin')->group(function () {
 
     // 🗑 HAPUS
     Route::delete('/warta/{id}', [App\Http\Controllers\Admin\WartaController::class, 'destroy']);
-    
+
+     // ================= JADWAL IBADAH =================
+   
+
+   Route::get('/jadwal-ibadah', [JadwalIbadahController::class, 'index'])
+        ->name('admin.jadwal.index');
+
+    Route::get('/jadwal-ibadah/create', [JadwalIbadahController::class, 'create'])
+        ->name('admin.jadwal.create');
+
+    Route::post('/jadwal-ibadah', [JadwalIbadahController::class, 'store'])
+        ->name('admin.jadwal.store');
 });
 
 /*
