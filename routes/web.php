@@ -5,7 +5,8 @@ use App\Http\Controllers\WartaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\JemaatController;
 use App\Http\Controllers\Admin\WartaController as AdminWartaController;
-
+use App\Http\Controllers\Pendeta\PengumumanController as PendetaPengumumanController;
+use App\Models\Pengumuman;
 
 
 /*
@@ -39,7 +40,9 @@ Route::get('/jadwal', function () {
 })->name('jadwal');
 
 Route::get('/pengumuman', function () {
-    return view('frontend.pengumuman.index');
+    $pengumuman = Pengumuman::latest('created_at')->get();
+    $highlight = $pengumuman->first();
+    return view('frontend.pengumuman.index', compact('pengumuman', 'highlight'));
 })->name('pengumuman');
 
 Route::get('/tentang', function () {
@@ -97,6 +100,15 @@ Route::get('/pendeta/keuangan', function () {
     return view('pendeta.keuangan.index');
 })->name('pendeta.keuangan');
 
-Route::get('/pendeta/pengumuman', function () {
-    return view('pendeta.pengumuman.index');
-})->name('pendeta.pengumuman');
+
+
+
+
+Route::prefix('pendeta')->group(function () {
+    Route::get('/pengumuman', [PendetaPengumumanController::class, 'index'])->name('pendeta.pengumuman');
+    Route::get('/pengumuman/create', [PendetaPengumumanController::class, 'create']);
+    Route::post('/pengumuman', [PendetaPengumumanController::class, 'store']);
+    Route::get('/pengumuman/{id}/edit', [PendetaPengumumanController::class, 'edit']);
+    Route::put('/pengumuman/{id}', [PendetaPengumumanController::class, 'update']);
+    Route::delete('/pengumuman/{id}', [PendetaPengumumanController::class, 'destroy']);
+});

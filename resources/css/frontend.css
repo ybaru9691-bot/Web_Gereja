@@ -1,0 +1,309 @@
+/* Modern Homepage & Frontend Styling */
+
+:root {
+  --primary: #2e42f0;
+  --primary-light: rgba(46, 66, 240, 0.08);
+  --accent: #cbbf6a;
+  --accent-light: rgba(203, 191, 106, 0.1);
+  --gray-100: #f9fafb;
+  --gray-200: #f3f4f6;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+}
+
+/* Homepage Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #5e7ce2 100%);
+  color: white;
+  padding: 4rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 3rem;
+  box-shadow: 0 12px 40px rgba(46, 66, 240, 0.2);
+  animation: fadeInDown 0.6s ease;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .btn {
+  margin-top: 0.5rem;
+  background: white;
+  color: var(--primary);
+  font-weight: 600;
+  padding: 0.7rem 2rem;
+}
+
+.hero .btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-3px);
+}
+
+/* Section Boxes */
+.section-box {
+  background: var(--gray-100);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.section-box:hover {
+  background: white;
+  border-color: var(--primary-light);
+  box-shadow: 0 8px 24px rgba(46, 66, 240, 0.1);
+  transform: translateY(-4px);
+}
+
+.section-box h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.section-box p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  background: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--primary);
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Cards - Pengumuman & Warta */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.card-item {
+  background: white;
+  border: 1px solid #f0f0f3;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-item:hover {
+  box-shadow: 0 8px 24px rgba(46, 66, 240, 0.12);
+  transform: translateY(-6px);
+  border-color: var(--primary-light);
+}
+
+.card-item h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.card-item p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.card-item .badge-pendeta {
+  background: linear-gradient(135deg, var(--primary), #5e7ce2);
+  color: white;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.card-item .text-muted {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(180deg, var(--gray-100), white);
+  border-top: 1px solid #f0f0f3;
+  padding: 2rem 0;
+  margin-top: 4rem;
+}
+
+footer p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Pengumuman & Warta Pages */
+.pengumuman-page, .warta-page {
+  padding: 2rem 0;
+}
+
+.pengumuman-page h1, .warta-page h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.pengumuman-page > p, .warta-page > p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+/* Search Bar */
+.search-box {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.search-box:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.search-box input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-item {
+  animation: fadeInUp 0.5s ease both;
+}
+
+.card-item:nth-child(1) { animation-delay: 0.05s; }
+.card-item:nth-child(2) { animation-delay: 0.1s; }
+.card-item:nth-child(3) { animation-delay: 0.15s; }
+.card-item:nth-child(4) { animation-delay: 0.2s; }
+.card-item:nth-child(n+5) { animation-delay: 0.25s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .card-list {
+    grid-template-columns: 1fr;
+  }
+
+  .section-box {
+    padding: 1.5rem;
+  }
+}

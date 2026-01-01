@@ -7,44 +7,47 @@
 
     {{-- JUDUL --}}
     <h1 class="fw-bold">Pengumuman Jemaat</h1>
-    <p class="text-muted">
-        Informasi terbaru dari pendeta dan majelis untuk seluruh jemaat
-    </p>
+    <p class="text-muted">Informasi terbaru dari pendeta dan majelis untuk seluruh jemaat</p>
 
     {{-- PENGUMUMAN UTAMA --}}
+    @if(isset($highlight))
     <div class="pengumuman-utama mt-4">
         <span class="badge-pendeta">Pengumuman dari pendeta</span>
 
         <h4 class="fw-bold mt-3">
-            Ibadah syukur akhir tahun dan doa bersama keluarga
+            {{ $highlight->judul }}
         </h4>
 
         <p class="text-muted">
-            Disampaikan oleh Pdt. Relita Gultom
+            Disampaikan oleh {{ optional($highlight->author)->name ?? 'Pendeta' }}
+        </p>
+
+        <p class="mt-3 text-muted small">
+            {{ \Illuminate\Support\Str::limit(strip_tags($highlight->isi), 300) }}
         </p>
     </div>
-
-    {{-- SUB JUDUL --}}
-    <h5 class="fw-bold mt-5">Pengumuman Terbaru</h5>
-
-    {{-- LIST PENGUMUMAN --}}
-    <div class="pengumuman-item mt-3">
-        <h6 class="fw-bold">
-            Pendaftaran Katekisasi Remaja Angkatan 2026
-        </h6>
-        <p>
-            Remaja usia 15–18 tahun diundang untuk mengikuti katekisasi...
-        </p>
+    @else
+    <div class="pengumuman-utama mt-4">
+        <span class="badge-pendeta">Pengumuman dari pendeta</span>
+        <h4 class="fw-bold mt-3">Belum ada pengumuman</h4>
     </div>
+    @endif
 
-    <div class="pengumuman-item mt-3">
-        <h6 class="fw-bold">
-            Pelayanan Diakonia : Pengumpulan Sembako Natal
-        </h6>
-        <p>
-            Jemaat yang tergerak dapat membawa bantuan sembako...
-        </p>
-    </div>
+        {{-- SUB JUDUL --}}
+        <h5 class="fw-bold mt-5">Pengumuman Terbaru</h5>
+
+        {{-- LIST PENGUMUMAN --}}
+        @if(isset($pengumuman) && $pengumuman->count())
+            @foreach($pengumuman as $p)
+                <div class="pengumuman-item mt-3">
+                    <h6 class="fw-bold">{{ $p->judul }}</h6>
+                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($p->isi), 200) }}</p>
+                    <div class="small text-muted">Tanggal: {{ \Carbon\Carbon::parse($p->tanggal)->format('d M Y') }}</div>
+                </div>
+            @endforeach
+    @else
+        <p class="text-muted mt-3">Belum ada pengumuman.</p>
+    @endif
 
 </div>
 @endsection

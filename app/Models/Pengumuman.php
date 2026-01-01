@@ -19,4 +19,8 @@ class Pengumuman extends Model
         'tanggal',
         'dibuat_oleh',
     ];
+
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
 }

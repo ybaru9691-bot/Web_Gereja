@@ -1,0 +1,291 @@
+/* Modern Interactive Admin & Pendeta Sidebar */
+
+:root {
+  --sidebar-bg: #1e2749;
+  --sidebar-text: #e8eaf6;
+  --sidebar-hover: rgba(255, 255, 255, 0.1);
+  --sidebar-active: #2e42f0;
+  --sidebar-active-bg: rgba(46, 66, 240, 0.15);
+}
+
+.admin-sidebar, .pendeta-sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, var(--sidebar-bg) 0%, #252f47 100%);
+  color: var(--sidebar-text);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo Section */
+.admin-sidebar .text-center, 
+.pendeta-sidebar .text-center {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.logo-circle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--sidebar-active), #5e7ce2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(46, 66, 240, 0.3);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.logo-circle:hover {
+  transform: scale(1.12) rotate(5deg);
+  box-shadow: 0 10px 32px rgba(46, 66, 240, 0.5);
+}
+
+.admin-sidebar strong, 
+.pendeta-sidebar strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+.admin-sidebar small, 
+.pendeta-sidebar small {
+  display: block;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+}
+
+/* Navigation Links */
+.nav {
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav li {
+  margin: 0;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--sidebar-text);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+/* Left border accent */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--sidebar-active);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.25s ease;
+  z-index: 1;
+}
+
+/* Background glow on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(46, 66, 240, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-link:hover {
+  background: var(--sidebar-hover);
+  transform: translateX(8px);
+}
+
+.nav-link:hover::before {
+  transform: scaleY(1);
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+}
+
+.nav-link.active {
+  background: var(--sidebar-active-bg);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(46, 66, 240, 0.2);
+  border-right: 2px solid var(--sidebar-active);
+}
+
+.nav-link.active::before {
+  transform: scaleY(1);
+}
+
+/* Icon styling in nav links */
+.nav-link i, .nav-link span:first-child {
+  min-width: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover i, 
+.nav-link:hover span:first-child {
+  transform: scale(1.2);
+}
+
+/* Logout button styling */
+.nav li:last-child {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.nav-link.text-danger {
+  color: #ff6b6b;
+}
+
+.nav-link.text-danger:hover {
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff5252;
+  transform: translateX(8px);
+}
+
+.nav-link.text-danger::before {
+  background: #ff6b6b;
+}
+
+.nav-link.text-danger:hover::before {
+  transform: scaleY(1);
+}
+
+/* Scrollbar styling */
+.admin-sidebar::-webkit-scrollbar,
+.pendeta-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track,
+.pendeta-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb,
+.pendeta-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb:hover,
+.pendeta-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-sidebar, .pendeta-sidebar {
+    width: 100%;
+    max-width: 250px;
+    margin-left: -250px;
+    transition: margin-left 0.3s ease;
+  }
+
+  .admin-sidebar.active, 
+  .pendeta-sidebar.active {
+    margin-left: 0;
+  }
+
+  .d-flex {
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
+  }
+}
+
+/* Animation classes for smooth transitions */
+.nav-link {
+  animation: slideInLink 0.4s ease both;
+}
+
+@keyframes slideInLink {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger animation for nav items */
+.nav li:nth-child(1) .nav-link { animation-delay: 0.05s; }
+.nav li:nth-child(2) .nav-link { animation-delay: 0.1s; }
+.nav li:nth-child(3) .nav-link { animation-delay: 0.15s; }
+.nav li:nth-child(4) .nav-link { animation-delay: 0.2s; }
+.nav li:nth-child(5) .nav-link { animation-delay: 0.25s; }
+.nav li:nth-child(6) .nav-link { animation-delay: 0.3s; }
+.nav li:nth-child(7) .nav-link { animation-delay: 0.35s; }
+.nav li:nth-child(8) .nav-link { animation-delay: 0.4s; }
+
+/* Focus for accessibility */
+.nav-link:focus {
+  outline: 2px solid rgba(46, 66, 240, 0.5);
+  outline-offset: 2px;
+}
+
+/* Pulse animation for new items or notifications */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(46, 66, 240, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 24px rgba(46, 66, 240, 0.4);
+  }
+}
+
+.nav-link.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Adjust main content to account for fixed sidebar */
+@media (min-width: 769px) {
+  main {
+    margin-left: 280px;
+  }
+
+  .d-flex {
+    align-items: stretch;
+  }
+}
