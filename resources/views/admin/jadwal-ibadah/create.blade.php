@@ -1,0 +1,83 @@
+@extends('layouts.admin')
+
+@section('title', 'Tambah Jadwal Ibadah')
+
+@section('content')
+<div class="container-fluid">
+
+    <h4 class="mb-4">Tambah Jadwal Ibadah</h4>
+
+    <div class="card">
+        <div class="card-body">
+
+            {{-- ERROR VALIDASI --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ url('/admin/jadwal-ibadah') }}" method="POST">
+                @csrf
+
+                <div class="row">
+                    {{-- TANGGAL --}}
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Tanggal Ibadah</label>
+                        <input type="date" name="tanggal" class="form-control" required>
+                    </div>
+
+                    {{-- WAKTU --}}
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Waktu Mulai</label>
+                        <input type="time" name="waktu_mulai" class="form-control" required>
+                    </div>
+                </div>
+
+                {{-- JENIS IBADAH --}}
+                <div class="mb-3">
+                    <label class="form-label">Jenis Ibadah</label>
+                    <input type="text" name="jenis_ibadah" class="form-control"
+                        placeholder="Contoh: Ibadah Minggu Pagi" required>
+                </div>
+
+                {{-- LOKASI --}}
+                <div class="mb-3">
+                    <label class="form-label">Lokasi</label>
+                    <input type="text" name="lokasi" class="form-control"
+                        placeholder="Contoh: Gereja Bethania" required>
+                </div>
+
+                {{-- PELAYAN --}}
+                <div class="mb-3">
+                    <label class="form-label">Pelayan / Pengkhotbah</label>
+                    <input type="text" name="pelayan" class="form-control"
+                        placeholder="Nama Pendeta / Pelayan" required>
+                </div>
+
+                {{-- KETERANGAN --}}
+                <div class="mb-3">
+                    <label class="form-label">Keterangan (Opsional)</label>
+                    <textarea name="keterangan" rows="3" class="form-control"></textarea>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url('/admin/jadwal-ibadah') }}" class="btn btn-secondary">
+                        Kembali
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        Simpan Jadwal
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+@endsection

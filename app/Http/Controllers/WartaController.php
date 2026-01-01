@@ -32,3 +32,8 @@ class WartaController extends Controller
         return view('frontend.warta.show', compact('warta'));
     }
 }
+
+
+
+
+
