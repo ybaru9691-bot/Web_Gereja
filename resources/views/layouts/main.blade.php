@@ -16,28 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend.css') }}">
-    <style>
-        .nav-link.active {
-            background-color: #2E42F0;
-            color: #fff !important;
-            border-radius: 20px;
-            padding: 6px 15px;
-        }
-        .hero {
-            background-color: #ececec;
-            padding: 50px 20px;
-        }
-        .section-box {
-            background-color: #f6f2f2;
-            padding: 20px;
-            border-radius: 12px;        
-            text-align: center;
-        }
-        footer {
-            background: #ddd;
-            padding: 20px 0;
-        }
-    </style>
+
 </head>
 <body>
 

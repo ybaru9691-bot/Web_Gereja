@@ -8,11 +8,11 @@
     <p>Akses warta jemaat, jadwal ibadah, dan pengumuman gereja dalam satu tempat yang terpusat dan mudah digunakan</p>
     
     <div class="mt-4">
-        <a href="{{ route('warta.index') }}" class="btn" style="background:white;color:#2e42f0;font-weight:600;padding:0.7rem 2rem;border-radius:8px;margin-right:1rem;">
-            📖 Lihat Warta Jemaat
+        <a href="{{ route('warta.index') }}" class="btn btn-hero-primary me-3">
+            <i class="bi bi-book me-2"></i> Lihat Warta Jemaat
         </a>
-        <a href="{{ route('pengumuman') }}" class="btn" style="background:rgba(255,255,255,0.2);color:white;font-weight:600;padding:0.7rem 2rem;border-radius:8px;">
-            📢 Lihat Pengumuman
+        <a href="{{ route('pengumuman') }}" class="btn btn-hero-secondary">
+            <i class="bi bi-megaphone me-2"></i> Lihat Pengumuman
         </a>
     </div>
 </section>

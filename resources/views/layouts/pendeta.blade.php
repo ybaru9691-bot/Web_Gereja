@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="{{ asset('css/pendeta/dashboard.css') }}">
 
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     
 </head>
@@ -38,15 +39,31 @@
         </div>
 
         <ul class="nav flex-column gap-2">
-            <li><a href="/pendeta/dashboard" class="nav-link active" title="Dashboard"><i class="fas fa-chart-pie me-2"></i>Dashboard</a></li>
-            <li><a href="/pendeta/pengumuman" class="nav-link" title="Pengumuman"><i class="fas fa-bullhorn me-2"></i>Pengumuman</a></li>
-            <li><a href="/pendeta/keuangan" class="nav-link" title="Keuangan"><i class="fas fa-wallet me-2"></i>Keuangan</a></li>
+            <li>
+                <a href="/pendeta/dashboard" class="nav-link {{ request()->is('pendeta/dashboard') ? 'active' : '' }}" title="Dashboard">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/pendeta/pengumuman" class="nav-link {{ request()->is('pendeta/pengumuman*') ? 'active' : '' }}" title="Pengumuman">
+                    <i class="bi bi-megaphone"></i>
+                    <span>Pengumuman</span>
+                </a>
+            </li>
+            <li>
+                <a href="/pendeta/keuangan" class="nav-link {{ request()->is('pendeta/keuangan*') ? 'active' : '' }}" title="Keuangan">
+                    <i class="bi bi-cash-coin"></i>
+                    <span>Keuangan</span>
+                </a>
+            </li>
             
             <li class="mt-auto pt-3" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
                     <button type="submit" class="btn btn-link nav-link text-danger p-0 w-100 text-start" style="text-decoration:none;">
-                        <i class="fas fa-sign-out-alt"></i> Logout
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Logout</span>
                     </button>
                 </form>
             </li>
@@ -76,26 +93,12 @@
       activeLink: '',
       init() {
         const links = this.$el.querySelectorAll('.nav-link');
-        
-        // Track active link
-        const currentPath = window.location.pathname;
-        links.forEach(link => {
-          const href = link.getAttribute('href');
-          if (href && currentPath.includes(href)) {
-            link.classList.add('active');
-          }
           
           // Hover tracking
-          link.addEventListener('mouseenter', () => { this.hovering = true; });
-          link.addEventListener('mouseleave', () => { this.hovering = false; });
-          
-          // Click animation
-          link.addEventListener('click', (e) => {
-            // Remove active from all, add to clicked
-            links.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
+          links.forEach(link => {
+            link.addEventListener('mouseenter', () => { this.hovering = true; });
+            link.addEventListener('mouseleave', () => { this.hovering = false; });
           });
-        });
       }
     }));
   });
