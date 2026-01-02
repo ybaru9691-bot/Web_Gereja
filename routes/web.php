@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\WartaController as AdminWartaController;
 
 use App\Http\Controllers\Pendeta\PengumumanController as PendetaPengumumanController;
 use App\Models\Pengumuman;
+use App\Models\Warta;
 
 use App\Http\Controllers\Admin\JadwalIbadahController;
   use App\Http\Controllers\JadwalController;
@@ -28,11 +29,40 @@ Route::get('/', function () {
 /* ================= LOGIN ================= */
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+
+// Password reset routes — direct reset (no email link)
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
+Route::get('/forgot-password', function () {
+    return view('auth.forgot');
+})->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    // Validate email and new password (confirmation required)
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    // Find the user by email
+    $user = User::where('email', $request->email)->first();
+
+    // For security/privacy, always return same success message whether user exists or not
+    if ($user) {
+        $user->password = Hash::make($request->password);
+        $user->setRememberToken(Str::random(60));
+        $user->save();
+    }
+
+    return redirect()->route('login')->with('status', 'Password berhasil direset. Silakan login dengan password baru.');
+})->name('password.update');
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+
 
 /* ================= FRONTEND ================= */
 Route::get('/warta', [WartaController::class, 'index'])
@@ -65,11 +95,14 @@ Route::get('/contact', function () {
 
 /* ================= DASHBOARD ================= */
 Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard.index');
+    $wartaCount = Warta::count();
+    return view('admin.dashboard.index', compact('wartaCount'));
 })->name('admin.dashboard');
 
 Route::get('/pendeta/dashboard', function () {
-    return view('pendeta.dashboard.index');
+    $wartaCount = \App\Models\Warta::count();
+    $pengumumanCount = \App\Models\Pengumuman::count();
+    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount'));
 })->name('pendeta.dashboard');
 
 /*

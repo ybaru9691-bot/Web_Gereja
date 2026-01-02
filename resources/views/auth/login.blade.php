@@ -12,7 +12,11 @@
             Login Admin & Pendeta
         </h3>
 
-        {{-- pesan error --}}
+        {{-- pesan status / error --}}
+        @if(session('status'))
+            <div class="alert alert-success">{{ session('status') }}</div>
+        @endif
+
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -40,7 +44,7 @@
             </div>
 
             <div class="text-end mb-3">
-                <a href="#" class="text-decoration-none">
+                <a href="{{ route('password.request') }}" class="text-decoration-none">
                     Lupa password?
                 </a>
             </div>

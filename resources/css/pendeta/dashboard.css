@@ -1,0 +1,79 @@
+/* Pendeta dashboard — Calm Professional theme */
+:root{
+  --pd-bg: #f6f8fb;
+  --pd-card: #ffffff;
+  --pd-accent: #2e42f0; /* primary */
+  --pd-muted: #6b7280;
+  --pd-shadow: 0 8px 24px rgba(16,24,40,0.06);
+  --pd-border: #eef2ff;
+}
+
+/* Specific sidebar style for Pendeta */
+.pendeta-sidebar {
+  background: linear-gradient(180deg,#0f172a 0%, #111827 100%);
+  color: #e6eefc;
+}
+.pendeta-sidebar .logo-circle {
+  background: linear-gradient(135deg, var(--pd-accent), #4f46e5);
+  border-radius: 12px;
+  width: 64px;
+  height: 64px;
+  font-size: 1.1rem;
+}
+.pendeta-sidebar .nav-link {
+  color: rgba(230,238,252,0.95);
+}
+.pendeta-sidebar .nav-link.active {
+  background: rgba(46,66,240,0.12);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(46,66,240,0.12);
+}
+
+/* Dashboard wrapper */
+.pd-header {
+  background: linear-gradient(90deg, rgba(46,66,240,0.06), rgba(99,102,241,0.03));
+  padding: 1.6rem;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.pd-header h2{ margin:0; font-weight:700; color:#0f172a; }
+.pd-header p{ margin:0; color:var(--pd-muted); }
+
+/* Stats grid */
+.pd-stats-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.pd-card{ background:var(--pd-card); padding:1.2rem; border-radius:12px; box-shadow:var(--pd-shadow); border:1px solid var(--pd-border); }
+.pd-card small{ color:var(--pd-muted); }
+.pd-card h4{ margin:0; font-size:1.45rem; color:#0f172a }
+.pd-card .badge{ font-weight:600; border-radius:8px; }
+
+/* Activity card */
+.pd-activity{ min-height:220px; }
+
+/* Responsive */
+@media (max-width: 991px){
+  .pd-stats-grid{ grid-template-columns: repeat(2,1fr); }
+  main{ margin-left: 0 !important; }
+  .pendeta-sidebar{ position: fixed; left: 0; width: 280px; transition: transform 0.28s ease; transform: translateX(-100%); box-shadow: 8px 0 40px rgba(2,6,23,0.4); z-index: 10002; }
+  .pendeta-sidebar.active{ transform: translateX(0); }
+
+  /* overlay */
+  .sidebar-overlay{ position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 9998; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
+  .sidebar-overlay.active{ opacity: 1; visibility: visible; }
+
+  /* toggle button */
+  #pendetaSidebarToggle{ position: fixed; top: 14px; left: 14px; z-index: 10001; }
+
+  /* close button in sidebar */
+  .pendeta-close{ background: rgba(255,255,255,0.06); border: none; color: white; }
+  .pendeta-close i{ font-size: 0.9rem; }
+}
+
+/* small aesthetic helpers */
+.pd-quick a{ text-decoration:none; color:var(--pd-accent); font-weight:600; }
+
+/* utility to disable body scroll while sidebar open */
+.no-scroll{ overflow: hidden !important; }

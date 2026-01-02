@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
 
+    {{-- Pendeta Dashboard Styles --}}
+    <link rel="stylesheet" href="{{ asset('css/pendeta/dashboard.css') }}">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     
 </head>
 <body style="background:#f5f5f5">
@@ -19,35 +25,44 @@
 <div class="d-flex">
     
     {{-- SIDEBAR --}}
-    <aside class="admin-sidebar p-3">
+    <aside class="pendeta-sidebar p-3">
         <div class="text-center mb-4">
-            <div class="logo-circle mb-2">Logo</div>
-            <strong>Gereja Bethania</strong><br>
-            <small>Dashboard Pendeta</small>
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="logo-circle mb-2"><i class="fas fa-church"></i></div>
+                    <strong>Gereja Bethania</strong><br>
+                    <small>Dashboard Pendeta</small>
+                </div>
+                <button id="pendetaSidebarClose" class="btn btn-sm btn-outline-light d-lg-none pendeta-close"><i class="fas fa-times"></i></button>
+            </div>
         </div>
 
         <ul class="nav flex-column gap-2">
-            <li><a href="/pendeta/dashboard" class="nav-link active" title="Dashboard">📊 Dashboard</a></li>
-            <li><a href="/pendeta/pengumuman" class="nav-link" title="Pengumuman">📢 Pengumuman</a></li>
-            <li><a href="/pendeta/keuangan" class="nav-link" title="Keuangan">💰 Keuangan</a></li>
+            <li><a href="/pendeta/dashboard" class="nav-link active" title="Dashboard"><i class="fas fa-chart-pie me-2"></i>Dashboard</a></li>
+            <li><a href="/pendeta/pengumuman" class="nav-link" title="Pengumuman"><i class="fas fa-bullhorn me-2"></i>Pengumuman</a></li>
+            <li><a href="/pendeta/keuangan" class="nav-link" title="Keuangan"><i class="fas fa-wallet me-2"></i>Keuangan</a></li>
             
-            <li>
-                <a href="{{ route('logout') }}"
-                   class="nav-link text-danger"
-                   title="Logout"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                   🚪 Logout
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            <li class="mt-auto pt-3" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
+                    <button type="submit" class="btn btn-link nav-link text-danger p-0 w-100 text-start" style="text-decoration:none;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
                 </form>
             </li>
         </ul>
     </aside>
 
+    {{-- Overlay for mobile sidebar --}}
+    <div id="pendeta-overlay" class="sidebar-overlay"></div>
+
     {{-- CONTENT --}}
     <main class="flex-fill p-4">
+        <!-- Mobile: sidebar toggle button -->
+        <button id="pendetaSidebarToggle" class="btn btn-outline-secondary d-lg-none mb-3">
+            <i class="fas fa-bars"></i>
+        </button>
+
         @yield('content')
     </main>
 
@@ -93,6 +108,49 @@
         // Uncomment to enable pulse: link.classList.add('pulse');
       }
     });
+
+    // Mobile sidebar toggle
+    const toggle = document.getElementById('pendetaSidebarToggle');
+    const sidebar = document.querySelector('.pendeta-sidebar');
+    const overlay = document.getElementById('pendeta-overlay');
+
+    function openSidebar(){
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeSidebar(){
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    }
+
+    if (toggle && sidebar && overlay){
+      // Ensure sidebar is closed initially on small screens
+      if (window.innerWidth <= 991) closeSidebar();
+
+      toggle.addEventListener('click', (e) => { e.stopPropagation(); openSidebar(); });
+      overlay.addEventListener('click', closeSidebar);
+
+      // Close button inside sidebar (mobile)
+      const closeBtn = document.getElementById('pendetaSidebarClose');
+      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+
+      // Close on escape
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
+
+      // Close/open on resize if crossing breakpoint
+      let lastWidth = window.innerWidth;
+      window.addEventListener('resize', () => {
+        const w = window.innerWidth;
+        if ((lastWidth > 991 && w <= 991)) {
+          // entered mobile size
+          closeSidebar();
+        }
+        lastWidth = w;
+      });
+    }
   });
 </script>
 

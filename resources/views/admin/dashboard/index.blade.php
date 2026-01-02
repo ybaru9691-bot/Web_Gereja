@@ -18,7 +18,7 @@
     <div class="col-md-3">
         <div class="bg-white p-3 rounded shadow-sm">
             <small>Jumlah Warta</small>
-            <h4 class="fw-bold">96</h4>
+            <h4 class="fw-bold">{{ $wartaCount ?? 0 }}</h4>
             <span class="badge bg-warning text-dark">Semua waktu</span>
         </div>
     </div>
