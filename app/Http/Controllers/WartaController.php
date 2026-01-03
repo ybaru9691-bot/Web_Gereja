@@ -11,11 +11,21 @@ class WartaController extends Controller
      * Halaman daftar warta jemaat (frontend)
      * HANYA warta yang status = published
      */
-    public function index()
+    public function index(Request $request)
     {
-        $wartas = Warta::where('status', 'published')
-            ->orderBy('tanggal', 'desc')
-            ->get();
+        $query = Warta::where('status', 'published');
+
+        if ($request->filter == 'week') {
+            $query->whereBetween('tanggal', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ]);
+        } elseif ($request->filter == 'month') {
+            $query->whereMonth('tanggal', now()->month)
+                  ->whereYear('tanggal', now()->year);
+        }
+
+        $wartas = $query->orderBy('tanggal', 'desc')->get();
 
         return view('frontend.warta.index', compact('wartas'));
     }

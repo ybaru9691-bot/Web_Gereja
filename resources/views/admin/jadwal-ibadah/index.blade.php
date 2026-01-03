@@ -66,16 +66,20 @@
     </td>
 
     {{-- AKSI --}}
+    {{-- AKSI --}}
     <td>
-        <a href="{{ route('jadwal.show', $item->id_jadwal) }}"
-           class="btn btn-sm btn-info">
-            Detail
-        </a>
-
-        <a href="{{ url('/admin/jadwal-ibadah/'.$item->id.'/edit') }}"
+        <a href="{{ route('admin.jadwal.edit', $item->id_jadwal) }}"
            class="btn btn-sm btn-warning">
             Edit
         </a>
+
+        <form action="{{ route('admin.jadwal.destroy', $item->id_jadwal) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus jadwal ini?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger">
+                Hapus
+            </button>
+        </form>
     </td>
 </tr>
 @empty

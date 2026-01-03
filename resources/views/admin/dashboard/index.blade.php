@@ -10,7 +10,7 @@
     <div class="col-md-3">
         <div class="bg-white p-3 rounded shadow-sm">
             <small>Jumlah Jemaat</small>
-            <h4 class="fw-bold">428</h4>
+            <h4 class="fw-bold">{{ $jemaatCount ?? 0 }}</h4>
             <span class="badge bg-success">Aktif</span>
         </div>
     </div>

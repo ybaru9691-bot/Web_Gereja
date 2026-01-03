@@ -27,7 +27,10 @@
     {{-- SIDEBAR --}}
     <aside class="admin-sidebar p-3">
         <div class="text-center mb-4">
-            <div class="logo-circle mb-2">Logo</div>
+            <img src="{{ asset('images/Logo HKBP.png') }}"
+                 alt="Logo"
+                 class="mb-2"
+                 style="width: 5rem; height: 5rem; object-fit: contain;">
             <strong>Gereja Bethania</strong><br>
             <small>Dashboard Admin</small>
         </div>

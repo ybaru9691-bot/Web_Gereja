@@ -4,12 +4,22 @@
 
 <div class="page-container">
 
-    <div class="page-header">
-        <h2 class="page-title">Kelola Warta Gereja</h2>
+    <div class="page-header align-items-start">
+        <div>
+            <h2 class="page-title">Kelola Warta Gereja</h2>
+            <p class="text-muted small mb-0">Halaman ini digunakan untuk mengunggah, mengedit, dan mempublikasikan warta jemaat mingguan.</p>
+        </div>
 
-        <a href="{{ url('/admin/warta/create') }}" class="btn-primary">
-            + Tambah Warta
-        </a>
+        <div class="d-flex flex-column align-items-end gap-2">
+            <a href="{{ url('/admin/warta/create') }}" class="btn-primary">
+                + Tambah Warta
+            </a>
+            
+            <div class="bg-light border rounded p-2 text-muted shadow-sm" style="max-width: 250px; font-size: 0.8rem;">
+                <i class="bi bi-info-circle-fill text-info me-1"></i>
+                Fitur ini membantu admin mengelola informasi ibadah dan pengumuman yang dapat diakses oleh jemaat via aplikasi mobile.
+            </div>
+        </div>
     </div>
 
     <div class="card">

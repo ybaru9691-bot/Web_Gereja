@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark p-3 shadow">
     <div class="container">
         <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
-            <span class="logo-icon me-2">⛪</span>
-            <span>Logo Gereja</span>
+            <img src="{{ asset('images/Logo HKBP.png') }}" alt="Logo Gereja" height="40" class="me-2">
+            <span>Gereja Bethania</span>
         </a>
 
         <button class="navbar-toggler" type="button" id="navbarToggler">

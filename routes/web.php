@@ -96,13 +96,15 @@ Route::get('/contact', function () {
 /* ================= DASHBOARD ================= */
 Route::get('/admin/dashboard', function () {
     $wartaCount = Warta::count();
-    return view('admin.dashboard.index', compact('wartaCount'));
+    $jemaatCount = \App\Models\Jemaat::count();
+    return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount'));
 })->name('admin.dashboard');
 
 Route::get('/pendeta/dashboard', function () {
     $wartaCount = \App\Models\Warta::count();
     $pengumumanCount = \App\Models\Pengumuman::count();
-    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount'));
+    $jemaatCount = \App\Models\Jemaat::count();
+    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount', 'jemaatCount'));
 })->name('pendeta.dashboard');
 
 /*
@@ -141,6 +143,15 @@ Route::prefix('admin')->group(function () {
 
     Route::post('/jadwal-ibadah', [JadwalIbadahController::class, 'store'])
         ->name('admin.jadwal.store');
+
+    Route::get('/jadwal-ibadah/{id}/edit', [JadwalIbadahController::class, 'edit'])
+        ->name('admin.jadwal.edit');
+
+    Route::put('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'update'])
+        ->name('admin.jadwal.update');
+
+    Route::delete('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'destroy'])
+        ->name('admin.jadwal.destroy');
 });
 
 /*

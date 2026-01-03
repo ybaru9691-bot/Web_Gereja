@@ -15,7 +15,7 @@
     {{-- PROFIL GEREJA --}}
     <div class="row align-items-center mb-5 tentang-section">
         <div class="col-md-6 mb-3 mb-md-0">
-            <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800"
+            <img src="{{ asset('images/img gereja.jpeg') }}"
                  alt="Gereja Bethania"
                  class="img-fluid gereja-img">
         </div>

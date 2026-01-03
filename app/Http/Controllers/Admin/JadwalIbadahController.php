@@ -32,9 +32,39 @@ class JadwalIbadahController extends Controller
 
         JadwalIbadah::create($request->all());
 
-       
-            return redirect('/admin/jadwal-ibadah')
-    ->with('success', 'Jadwal ibadah berhasil ditambahkan');
+            return redirect()->route('admin.jadwal.index')
+                ->with('success', 'Jadwal ibadah berhasil ditambahkan');
+    }
 
+    public function edit($id)
+    {
+        $jadwal = JadwalIbadah::findOrFail($id);
+        return view('admin.jadwal-ibadah.edit', compact('jadwal'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'tanggal'       => 'required|date',
+            'waktu_mulai'   => 'required',
+            'jenis_ibadah'  => 'required',
+            'lokasi'        => 'required',
+            'pelayan'       => 'required',
+        ]);
+
+        $jadwal = JadwalIbadah::findOrFail($id);
+        $jadwal->update($request->all());
+
+        return redirect()->route('admin.jadwal.index')
+            ->with('success', 'Jadwal ibadah berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $jadwal = JadwalIbadah::findOrFail($id);
+        $jadwal->delete();
+
+        return redirect()->route('admin.jadwal.index')
+            ->with('success', 'Jadwal ibadah berhasil dihapus');
     }
 }
