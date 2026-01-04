@@ -8,6 +8,7 @@ class JadwalIbadah extends Model
 {
     protected $table = 'jadwal_ibadah';
     protected $primaryKey = 'id_jadwal';
+    public $incrementing = true;
 
     protected $fillable = [
         'tanggal',
@@ -17,6 +18,6 @@ class JadwalIbadah extends Model
         'lokasi',
         'pelayan',
         'keterangan',
-        'status',
+        'status'
     ];
 }
