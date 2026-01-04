@@ -12,6 +12,11 @@ use App\Models\Warta;
 
 use App\Http\Controllers\Admin\JadwalIbadahController;
   use App\Http\Controllers\JadwalController;
+  use App\Http\Controllers\ScanController;
+use App\Http\Controllers\Admin\ScanLogController;
+
+  
+
 
 
 
@@ -135,23 +140,29 @@ Route::prefix('admin')->group(function () {
      // ================= JADWAL IBADAH =================
    
 
-   Route::get('/jadwal-ibadah', [JadwalIbadahController::class, 'index'])
-        ->name('admin.jadwal.index');
+  // ================= JADWAL IBADAH =================
 
-    Route::get('/jadwal-ibadah/create', [JadwalIbadahController::class, 'create'])
-        ->name('admin.jadwal.create');
+Route::get('/jadwal-ibadah', [JadwalIbadahController::class, 'index'])
+    ->name('admin.jadwal.index');
 
-    Route::post('/jadwal-ibadah', [JadwalIbadahController::class, 'store'])
-        ->name('admin.jadwal.store');
+Route::get('/jadwal-ibadah/create', [JadwalIbadahController::class, 'create'])
+    ->name('admin.jadwal.create');
 
-    Route::get('/jadwal-ibadah/{id}/edit', [JadwalIbadahController::class, 'edit'])
-        ->name('admin.jadwal.edit');
+Route::post('/jadwal-ibadah', [JadwalIbadahController::class, 'store'])
+    ->name('admin.jadwal.store');
 
-    Route::put('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'update'])
-        ->name('admin.jadwal.update');
+// ✏️ EDIT
+Route::get('/jadwal-ibadah/{id}/edit', [JadwalIbadahController::class, 'edit'])
+    ->name('admin.jadwal.edit');
 
-    Route::delete('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'destroy'])
-        ->name('admin.jadwal.destroy');
+// 💾 UPDATE
+Route::put('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'update'])
+    ->name('admin.jadwal.update');
+
+// 🗑 DELETE
+Route::delete('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'destroy'])
+    ->name('admin.jadwal.destroy');
+
 });
 
 /*

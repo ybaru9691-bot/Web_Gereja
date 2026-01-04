@@ -85,19 +85,19 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/scan" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="bi bi-qr-code-scan"></i>
                     <span>Scan Log</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/analisis" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="bi bi-graph-up-arrow"></i>
                     <span>Analisis Jemaat</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/keuangan" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="bi bi-cash-coin"></i>
                     <span>Keuangan</span>
                 </a>
