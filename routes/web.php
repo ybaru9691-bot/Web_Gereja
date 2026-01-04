@@ -163,7 +163,15 @@ Route::put('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'update'])
 Route::delete('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'destroy'])
     ->name('admin.jadwal.destroy');
 
+// ================= SCAN LOG =================
+Route::get('/scan', [ScanLogController::class, 'index'])
+    ->name('admin.scan.index');
 });
+
+
+Route::get('/scan/{id_jadwal}', [ScanController::class, 'scan'])
+    ->name('scan.jemaat');
+
 
 /*
 |--------------------------------------------------------------------------
