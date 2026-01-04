@@ -2,9 +2,19 @@
    WARNA UTAMA DESAIN
 ================================ */
 :root {
-    --gold: #cbbf6a;
-    --soft-gray: #d6cfcf;
-    --dark: #2e2e2e;
+    font-family: 'Dubai', sans-serif !important;
+}
+
+* {
+    font-family: 'Dubai', sans-serif !important;
+}
+
+:root {
+    --forest: #52796F;
+    --forest-dark: #354F52;
+    --sage: #84A98C;
+    --soft-cream: #CAD2C5;
+    --dark: #2F3E46;
 }
 
 /* ===============================
@@ -23,7 +33,7 @@
    FILTER
 ================================ */
 .warta-filter {
-    background: var(--soft-gray);
+    background: var(--soft-cream);
     border-radius: 12px;
 }
 
@@ -31,7 +41,7 @@
    CARD WARTA
 ================================ */
 .warta-card {
-    background: var(--gold);
+    background: var(--forest);
     border-radius: 16px;
     transition: 0.3s;
 }
@@ -53,13 +63,13 @@
    BUTTON
 ================================ */
 .btn-warta {
-    background: #0d6efd;
+    background: var(--forest-dark);
     color: #fff;
     border-radius: 999px;
     padding: 8px 24px;
 }
 
 .btn-warta:hover {
-    background: #0b5ed7;
+    background: var(--dark);
     color: #fff;
 }

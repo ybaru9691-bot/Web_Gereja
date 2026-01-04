@@ -35,15 +35,15 @@
             <div class="col-lg-4 text-lg-end">
                 <div class="btn-group" role="group">
                     <a href="{{ route('warta.index', ['filter' => 'week']) }}" 
-                       class="btn btn-sm {{ request('filter') == 'week' ? 'btn-primary' : 'btn-outline-primary' }} rounded-start-pill px-3">
+                       class="btn btn-sm {{ request('filter') == 'week' ? 'btn-forest' : 'btn-outline-forest' }} rounded-start-pill px-3">
                         Minggu Ini
                     </a>
                     <a href="{{ route('warta.index', ['filter' => 'month']) }}" 
-                       class="btn btn-sm {{ request('filter') == 'month' ? 'btn-primary' : 'btn-outline-primary' }} px-3">
+                       class="btn btn-sm {{ request('filter') == 'month' ? 'btn-forest' : 'btn-outline-forest' }} px-3">
                         Bulan Ini
                     </a>
                     <a href="{{ route('warta.index') }}" 
-                       class="btn btn-sm {{ !request('filter') ? 'btn-primary' : 'btn-outline-primary' }} rounded-end-pill px-3">
+                       class="btn btn-sm {{ !request('filter') ? 'btn-forest' : 'btn-outline-forest' }} rounded-end-pill px-3">
                         Semua
                     </a>
                 </div>
@@ -59,7 +59,7 @@
                     
                     {{-- DECORATIVE HEADER / IMAGE PLACEHOLDER --}}
                     <div class="card-header border-0 p-4 text-white d-flex align-items-center justify-content-center" 
-                         style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); height: 160px;">
+                         style="background: linear-gradient(135deg, #588157 0%, #3a5a40 100%); height: 160px;">
                         <div class="text-center">
                             <h3 class="fw-bold mb-0 text-white-50">{{ \Carbon\Carbon::parse($warta->tanggal)->format('d') }}</h3>
                             <h5 class="text-uppercase mb-0">{{ \Carbon\Carbon::parse($warta->tanggal)->translatedFormat('M Y') }}</h5>
@@ -68,7 +68,7 @@
 
                     <div class="card-body p-4 d-flex flex-column">
                         <div class="mb-3">
-                            <span class="badge bg-light text-primary rounded-pill px-3 py-2">
+                            <span class="badge bg-light rounded-pill px-3 py-2" style="color: #588157;">
                                 <i class="bi bi-calendar-event me-1"></i>
                                 {{ \Carbon\Carbon::parse($warta->tanggal)->translatedFormat('l, d F Y') }}
                             </span>
@@ -88,7 +88,7 @@
                             <small class="text-muted">
                                 <i class="bi bi-person-circle me-1"></i> Majelis Jemaat
                             </small>
-                            <span class="text-primary fw-semibold small">
+                            <span class="fw-semibold small" style="color: #588157;">
                                 Baca selengkapnya <i class="bi bi-arrow-right ms-1"></i>
                             </span>
                         </div>
@@ -114,7 +114,25 @@
     }
     .hover-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        box-shadow: 0 10px 20px rgba(88, 129, 87, 0.15) !important;
+    }
+    .btn-forest {
+        background-color: #588157;
+        color: white;
+        border-color: #588157;
+    }
+    .btn-forest:hover {
+        background-color: #3a5a40;
+        color: white;
+        border-color: #3a5a40;
+    }
+    .btn-outline-forest {
+        color: #588157;
+        border-color: #588157;
+    }
+    .btn-outline-forest:hover {
+        background-color: #588157;
+        color: white;
     }
 </style>
 

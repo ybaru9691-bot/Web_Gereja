@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Dashboard Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- Dubai Font --}}
+    <link href="https://fonts.cdnfonts.com/css/dubai" rel="stylesheet">
+
 
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,14 +21,33 @@
     <link rel="stylesheet" href="{{ asset('css/admin/data.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/tambah.css') }}">
       <link rel="stylesheet" href="{{ asset('css/admin/warta.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/hints.css') }}">
     
 </head>
-<body style="background:#f5f5f5">
+<body style="background:#f0f4f2" x-data="{ sidebarOpen: false }">
 
 <div class="d-flex">
+    {{-- BACKDROP (Mobile Only) --}}
+    <div 
+        class="sidebar-overlay" 
+        x-show="sidebarOpen" 
+        @click="sidebarOpen = false"
+        x-transition:opacity
+    ></div>
+
+    {{-- BURGER BUTTON (Mobile Only) --}}
+    <button 
+        class="mobile-toggle-btn d-md-none" 
+        @click="sidebarOpen = !sidebarOpen"
+    >
+        <i class="bi bi-list"></i>
+    </button>
     
     {{-- SIDEBAR --}}
-    <aside class="admin-sidebar p-3">
+    <aside 
+        class="admin-sidebar p-3" 
+        :class="{ 'show': sidebarOpen }"
+    >
         <div class="text-center mb-4">
             <img src="{{ asset('images/Logo HKBP.png') }}"
                  alt="Logo"
@@ -63,19 +85,19 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="/admin/scan" class="nav-link">
                     <i class="bi bi-qr-code-scan"></i>
                     <span>Scan Log</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="/admin/analisis" class="nav-link">
                     <i class="bi bi-graph-up-arrow"></i>
                     <span>Analisis Jemaat</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="/admin/keuangan" class="nav-link">
                     <i class="bi bi-cash-coin"></i>
                     <span>Keuangan</span>
                 </a>

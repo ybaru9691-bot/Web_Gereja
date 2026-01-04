@@ -1,20 +1,239 @@
-/* =========================
-   JADWAL IBADAH
-========================= */
+/* ========================================
+   JADWAL IBADAH - MODERN PREMIUM DESIGN
+   ======================================== */
 
 .jadwal-page {
     padding-bottom: 80px;
+    padding-top: 20px;
+    font-family: 'Dubai', sans-serif !important;
 }
 
+* {
+    font-family: 'Dubai', sans-serif !important;
+}
+
+.jadwal-page h1 {
+    background: linear-gradient(135deg, #52796F 0%, #354F52 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.jadwal-page > p.text-muted {
+    color: #6b7280 !important;
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ========================================
+   TABLE HEADER
+   ======================================== */
 .jadwal-header {
-    background-color: #e2d59c;
+    background: linear-gradient(135deg, #52796F 0%, #354F52 100%);
+    font-weight: 700;
+    color: #ffffff !important;
+    padding: 18px 25px !important;
+    border-radius: 16px !important;
+    box-shadow: 
+        0 8px 20px rgba(53, 79, 82, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.jadwal-header .col-md-3,
+.jadwal-header .col-md-2 {
+    color: #ffffff;
+}
+
+/* ========================================
+   SCHEDULE ROW CARDS
+   ======================================== */
+.jadwal-row {
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    padding: 20px 25px !important;
+    border-radius: 16px !important;
+    border: 1px solid #e5e7eb;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px !important;
+}
+
+.jadwal-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #52796F 0%, #354F52 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.jadwal-row:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 12px 24px rgba(82, 121, 111, 0.15),
+        0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #52796F;
+}
+
+.jadwal-row:hover::before {
+    opacity: 1;
+}
+
+/* ========================================
+   ROW CONTENT STYLING
+   ======================================== */
+.jadwal-row .col-md-3,
+.jadwal-row .col-md-2 {
+    color: #1f2937;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Date column with icon */
+.jadwal-row .col-md-3:first-child {
+    font-weight: 600;
+    color: #354F52;
+}
+
+/* Time styling */
+.jadwal-row .col-md-2:nth-child(2) {
+    color: #4b5563;
+    font-family: 'Dubai', sans-serif !important;
     font-weight: 600;
 }
 
-.jadwal-row {
-    background-color: #d6d6d6;
+/* Service type */
+.jadwal-row .col-md-3:nth-child(3) {
+    font-weight: 600;
+    color: #1f2937;
 }
 
-.jadwal-row:not(:last-child) {
-    margin-bottom: 10px;
+/* Location */
+.jadwal-row .col-md-2:nth-child(4) {
+    color: #6b7280;
 }
+
+/* ========================================
+   DETAIL BUTTON
+   ======================================== */
+.jadwal-row .btn-primary {
+    background: linear-gradient(135deg, #52796F 0%, #354F52 100%);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 10px rgba(82, 121, 111, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+}
+
+.jadwal-row .btn-primary:hover {
+    background: linear-gradient(135deg, #354F52 0%, #2F3E46 100%);
+    transform: scale(1.05);
+    box-shadow: 
+        0 6px 16px rgba(82, 121, 111, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.jadwal-row .btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.jadwal-page .alert-info {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border: 1px solid #93c5fd;
+    color: #1e40af;
+    border-radius: 16px;
+    padding: 25px;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .jadwal-page h1 {
+        font-size: 2rem;
+    }
+    
+    .jadwal-header {
+        display: none; /* Hide header on mobile for better UX */
+    }
+    
+    .jadwal-row {
+        padding: 20px 15px !important;
+        border-radius: 12px !important;
+    }
+    
+    .jadwal-row .col-md-3,
+    .jadwal-row .col-md-2 {
+        flex-direction: column;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .jadwal-row .col-md-3:first-child {
+        font-size: 1rem;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .jadwal-row .btn-primary {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* ========================================
+   ADDITIONAL ENHANCEMENTS
+   ======================================== */
+
+/* Add subtle animation on load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.jadwal-row {
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.jadwal-row:nth-child(1) { animation-delay: 0.1s; }
+.jadwal-row:nth-child(2) { animation-delay: 0.15s; }
+.jadwal-row:nth-child(3) { animation-delay: 0.2s; }
+.jadwal-row:nth-child(4) { animation-delay: 0.25s; }
+.jadwal-row:nth-child(5) { animation-delay: 0.3s; }
+

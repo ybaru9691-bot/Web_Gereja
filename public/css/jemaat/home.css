@@ -1,22 +1,22 @@
 /* Modern Home Page CSS - Enhanced Edition */
 
 :root {
-    --primary-color: #2e42f0;
-    --primary-hover: #4054f5;
-    --text-dark: #1e293b;
-    --text-light: #64748b;
-    --bg-light: #f8fafc;
-    --card-bg: #ffffff;
+    --primary-color: #52796F;
+    --primary-hover: #354F52;
+    --text-dark: #2F3E46;
+    --text-light: #52796F;
+    --bg-light: #CAD2C5;
+    --card-bg: #f8faf9;
 }
 
 body {
     background-color: var(--bg-light);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Dubai', sans-serif;
 }
 
 /* HERO SECTION */
 .hero {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95)),
+    background: linear-gradient(135deg, rgba(53, 79, 82, 0.9), rgba(47, 62, 70, 0.95)),
         url('https://images.unsplash.com/photo-1548625149-fc4a29cf7092?q=80&w=2000&auto=format&fit=crop') center/cover;
     padding: 120px 20px 100px;
     color: white;
@@ -35,8 +35,52 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at top right, rgba(46, 66, 240, 0.3), transparent 60%);
+    background: radial-gradient(circle at top right, rgba(132, 169, 140, 0.3), transparent 60%);
     pointer-events: none;
+}
+
+/* Typing Text Animation */
+.typing-text-container {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.typing-text {
+    font-weight: 800;
+    font-size: 3rem;
+    margin-bottom: 0;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #fff, #84A98C, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+}
+
+/* Blinking cursor effect */
+.typing-text::after {
+    content: '|';
+    position: absolute;
+    right: -15px;
+    background: linear-gradient(to right, #fff, #84A98C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
 }
 
 .hero h1 {
@@ -113,8 +157,8 @@ body {
 
 .section-box:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px -5px rgba(46, 66, 240, 0.15);
-    border-color: rgba(46, 66, 240, 0.1);
+    box-shadow: 0 20px 40px -5px rgba(82, 121, 111, 0.15);
+    border-color: rgba(82, 121, 111, 0.1);
 }
 
 .section-box h3 {
@@ -130,11 +174,25 @@ body {
     font-size: 0.95rem;
 }
 
+.section-box .btn-primary {
+    background: linear-gradient(135deg, #52796F 0%, #354F52 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(82, 121, 111, 0.3);
+    color: white;
+}
+
+.section-box .btn-primary:hover {
+    background: linear-gradient(135deg, #354F52 0%, #52796F 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(82, 121, 111, 0.4);
+    color: white;
+}
+
 .section-box .btn {
     border-radius: 20px;
     padding: 8px 24px;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .section-box::after {
@@ -144,7 +202,7 @@ body {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), #818cf8);
+    background: linear-gradient(90deg, #52796F, #84A98C);
     opacity: 0;
     transition: opacity 0.3s;
 }

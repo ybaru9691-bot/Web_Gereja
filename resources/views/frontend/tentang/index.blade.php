@@ -15,12 +15,12 @@
     {{-- PROFIL GEREJA --}}
     <div class="row align-items-center mb-5 tentang-section">
         <div class="col-md-6 mb-3 mb-md-0">
-            <img src="{{ asset('images/img gereja.jpeg') }}"
+            <img src="{{ asset('images/img betania.jpeg') }}"
                  alt="Gereja Bethania"
                  class="img-fluid gereja-img">
         </div>
         <div class="col-md-6">
-            <h4 class="fw-bold text-primary">Gereja Bethania</h4>
+            <h4 class="fw-bold" style="color: #588157;">Gereja Bethania</h4>
             <p class="text-muted">
                 Gereja Bethania adalah komunitas iman yang bertumbuh dalam kasih,
                 pelayanan, dan kesetiaan kepada Tuhan. Kami hadir untuk melayani
@@ -42,7 +42,7 @@
         <div class="col-md-6 mb-3">
             <div class="tentang-card h-100">
                 <div class="tentang-icon">
-                    <i class="bi bi-eye-fill">🎯</i>
+                    <i class="bi bi-eye-fill" style="color: #fff;"></i>
                 </div>
                 <h5 class="fw-bold">Visi</h5>
                 <p class="mb-0">
@@ -55,7 +55,7 @@
         <div class="col-md-6 mb-3">
             <div class="tentang-card h-100">
                 <div class="tentang-icon">
-                    <i class="bi bi-bullseye">🚀</i>
+                    <i class="bi bi-bullseye" style="color: #fff;"></i>
                 </div>
                 <h5 class="fw-bold">Misi</h5>
                 <ul class="mb-0">
@@ -72,7 +72,7 @@
     <div class="tentang-section sejarah text-center py-5 rounded-4 mb-5">
         <div class="container">
             <h4 class="fw-bold mb-4">Sejarah Singkat</h4>
-            <p class="lead mb-0">
+            <p class="lead mb-0 text-white">
                 Gereja Bethania didirikan pada tahun 1985 dengan visi untuk melayani
                 masyarakat dan membangun iman yang kokoh. Selama lebih dari 35 tahun,
                 kami telah menjadi rumah spiritual bagi ribuan jemaat dan terus bertumbuh
@@ -188,21 +188,21 @@
     <div class="row text-center mb-5">
         <div class="col-md-4 mb-3">
             <div class="tentang-card">
-                <div class="tentang-icon">📍</div>
+                <div class="tentang-icon"><i class="bi bi-geo-alt-fill"></i></div>
                 <h6 class="fw-bold">Alamat</h6>
                 <p class="text-muted mb-0">Jalan Karang Anyer 2<br>Kota Anda</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="tentang-card">
-                <div class="tentang-icon">📞</div>
+                <div class="tentang-icon"><i class="bi bi-telephone-fill"></i></div>
                 <h6 class="fw-bold">Telepon</h6>
                 <p class="text-muted mb-0">088xxx</p>
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="tentang-card">
-                <div class="tentang-icon">✉️</div>
+                <div class="tentang-icon"><i class="bi bi-envelope-fill"></i></div>
                 <h6 class="fw-bold">Email</h6>
                 <p class="text-muted mb-0">email@gereja.com</p>
             </div>

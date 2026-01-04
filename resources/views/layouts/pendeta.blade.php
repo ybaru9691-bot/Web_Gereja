@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Dashboard Pendeta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- Dubai Font --}}
+    <link href="https://fonts.cdnfonts.com/css/dubai" rel="stylesheet">
+
 
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

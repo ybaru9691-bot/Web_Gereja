@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Informasi Gereja</title>
+    {{-- Dubai Font --}}
+    <link href="https://fonts.cdnfonts.com/css/dubai" rel="stylesheet">
+
       <link rel="stylesheet" href="{{ asset('css/jemaat/home.css') }}">
         <link rel="stylesheet" href="{{ asset('css/jemaat/warta.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jemaat/jadwal.css') }}">

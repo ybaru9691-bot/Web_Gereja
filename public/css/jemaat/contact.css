@@ -2,6 +2,10 @@
    CONTACT PAGE
 ================================ */
 
+* {
+    font-family: 'Dubai', sans-serif !important;
+}
+
 .contact-page h1 {
     font-size: 2.2rem;
 }
@@ -31,11 +35,12 @@
 
 /* Button */
 .contact-page .btn-primary {
-    background-color: #2E42F0;
+    background: linear-gradient(135deg, #52796F, #354F52);
     border: none;
     padding: 8px 24px;
 }
 
 .contact-page .btn-primary:hover {
-    background-color: #1f2fd6;
+    background: linear-gradient(135deg, #354F52, #52796F);
+    transform: translateY(-2px);
 }

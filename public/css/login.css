@@ -1,7 +1,302 @@
-.login-card {
-    border-radius: 20px;
+/* ========================================
+   LOGIN PAGE - MODERN PREMIUM DESIGN
+   ======================================== */
+
+/* Page Container */
+.container {
+    position: relative;
 }
 
+/* Background Animation */
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+* {
+    font-family: 'Dubai', sans-serif !important;
+}
+
+body {
+    background: linear-gradient(-45deg, #52796F, #354F52, #84A98C, #CAD2C5);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+}
+
+/* ========================================
+   LOGIN CARD - GLASSMORPHISM EFFECT
+   ======================================== */
+.login-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 20px 60px rgba(82, 121, 111, 0.3),
+        0 8px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+    animation: floatIn 0.8s ease-out;
+}
+
+/* Floating entrance animation */
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Decorative gradient overlay */
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #52796F, #354F52, #84A98C, #CAD2C5);
+    background-size: 200% 100%;
+    animation: gradient-flow 3s ease infinite;
+}
+
+@keyframes gradient-flow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ========================================
+   HEADING STYLING
+   ======================================== */
 .login-card h3 {
-    color: #2E42F0;
+    background: linear-gradient(135deg, #52796F 0%, #354F52 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.85rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem !important;
+    position: relative;
+}
+
+/* ========================================
+   FORM LABELS
+   ======================================== */
+.login-card .form-label {
+    color: #2F3E46;
+    font-weight: 600 !important;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.3px;
+}
+
+/* ========================================
+   FORM INPUTS - MODERN STYLING
+   ======================================== */
+.login-card .form-control {
+    border: 2px solid #CAD2C5;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #fafaf8;
+    color: #2F3E46;
+    box-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.login-card .form-control:focus {
+    border-color: #52796F;
+    background: #ffffff;
+    box-shadow: 
+        0 0 0 4px rgba(82, 121, 111, 0.1),
+        0 4px 12px rgba(82, 121, 111, 0.15),
+        inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.login-card .form-control::placeholder {
+    color: #84A98C;
+    font-size: 0.9rem;
+}
+
+/* ========================================
+   ALERTS - ENHANCED STYLING
+   ======================================== */
+.login-card .alert-success {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border: 1px solid #6ee7b7;
+    color: #065f46;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+}
+
+.login-card .alert-danger {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.15);
+}
+
+/* ========================================
+   LINKS - FORGOT PASSWORD
+   ======================================== */
+.login-card a {
+    color: #52796F;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.login-card a:hover {
+    color: #354F52;
+    text-decoration: underline !important;
+}
+
+/* ========================================
+   SUBMIT BUTTON - PREMIUM DESIGN
+   ======================================== */
+.login-card .btn-primary {
+    background: linear-gradient(135deg, #52796F 0%, #354F52 100%);
+    border: none;
+    padding: 14px 32px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 20px rgba(82, 121, 111, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.login-card .btn-primary:hover {
+    background: linear-gradient(135deg, #354F52 0%, #52796F 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 28px rgba(82, 121, 111, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.login-card .btn-primary:hover::before {
+    left: 100%;
+}
+
+.login-card .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 4px 12px rgba(82, 121, 111, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   ERROR MESSAGES
+   ======================================== */
+.login-card .text-danger {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #dc2626;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 576px) {
+    .login-card {
+        border-radius: 20px !important;
+        padding: 2rem 1.5rem !important;
+    }
+    
+    .login-card h3 {
+        font-size: 1.6rem !important;
+    }
+    
+    .login-card .btn-primary {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ========================================
+   ADDITIONAL ENHANCEMENTS
+   ======================================== */
+
+/* Subtle pulse on card */
+@keyframes subtle-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 20px 60px rgba(82, 121, 111, 0.3),
+            0 8px 16px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    50% {
+        box-shadow: 
+            0 24px 68px rgba(82, 121, 111, 0.35),
+            0 10px 20px rgba(0, 0, 0, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+}
+
+.login-card {
+    animation: floatIn 0.8s ease-out, subtle-pulse 4s ease-in-out infinite 1s;
+}
+
+/* Password toggle icon */
+.password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #52796F;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.password-toggle:hover {
+    color: #354F52;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 50px !important;
 }

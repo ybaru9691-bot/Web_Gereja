@@ -1,16 +1,102 @@
+/* ========================================
+   AUTH LAYOUT - MODERN DESIGN
+   ======================================== */
+
+* {
+    font-family: 'Dubai', sans-serif !important;
+}
+
 .auth-bg {
-    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    background: linear-gradient(-45deg, #52796F, #354F52, #84A98C, #CAD2C5);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Decorative circles in background */
+.auth-bg::before,
+.auth-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 20s ease-in-out infinite;
+}
+
+.auth-bg::before {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.auth-bg::after {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-30px) scale(1.05);
+    }
+}
+
+/* Login Box Container */
 .login-box {
-    background: white;
-    padding: 30px;
-    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 24px;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+    max-width: 440px;
+    box-shadow: 
+        0 20px 60px rgba(47, 62, 70, 0.3),
+        0 8px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 10;
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .login-box {
+        padding: 30px 20px;
+        max-width: 90%;
+        border-radius: 20px;
+    }
 }

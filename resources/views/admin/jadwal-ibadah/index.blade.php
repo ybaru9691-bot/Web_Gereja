@@ -96,5 +96,8 @@
         </div>
     </div>
 
-</div>
+<x-hint-button title="Fungsi Jadwal Ibadah">
+    Mengatur jadwal pelayanan ibadah rutin dan khusus. Pastikan informasi tanggal, waktu, dan lokasi ibadah sudah akurat sebelum dipublikasikan agar jemaat mendapatkan informasi yang benar.
+</x-hint-button>
+
 @endsection

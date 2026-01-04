@@ -7,18 +7,13 @@
     <div class="page-header align-items-start">
         <div>
             <h2 class="page-title">Kelola Warta Gereja</h2>
-            <p class="text-muted small mb-0">Halaman ini digunakan untuk mengunggah, mengedit, dan mempublikasikan warta jemaat mingguan.</p>
+            
         </div>
 
         <div class="d-flex flex-column align-items-end gap-2">
             <a href="{{ url('/admin/warta/create') }}" class="btn-primary">
                 + Tambah Warta
             </a>
-            
-            <div class="bg-light border rounded p-2 text-muted shadow-sm" style="max-width: 250px; font-size: 0.8rem;">
-                <i class="bi bi-info-circle-fill text-info me-1"></i>
-                Fitur ini membantu admin mengelola informasi ibadah dan pengumuman yang dapat diakses oleh jemaat via aplikasi mobile.
-            </div>
         </div>
     </div>
 
@@ -91,5 +86,9 @@
     </div>
 
 </div>
+
+<x-hint-button title="Fungsi Kelola Warta">
+    Gunakan halaman ini untuk mempublikasikan warta jemaat mingguan. Anda dapat menambah warta baru, mengedit draf, atau menghapus warta yang sudah tidak diperlukan. Sistem akan otomatis men-generate QR Code untuk setiap warta yang dipublikasikan.
+</x-hint-button>
 
 @endsection

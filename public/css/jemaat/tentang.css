@@ -1,20 +1,30 @@
 /* ===============================
    TENTANG GEREJA
-================================ */
+ ================================ */
 
 .tentang-page {
-    background: linear-gradient(180deg, #f8f9ff, #ffffff);
+    background: linear-gradient(180deg,  #ffffff);
+    font-family: 'Dubai', sans-serif !important;
+}
+
+* {
+    font-family: 'Dubai', sans-serif !important;
 }
 
 /* Judul utama */
 .tentang-page h1 {
     font-size: 2.4rem;
-    color: #2E42F0;
+    background: linear-gradient(135deg, #52796F 0%, #354F52 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
 }
 
 /* Subtitle */
 .tentang-page .lead {
-    color: #555;
+    color: #52796F;
+    font-weight: 500;
 }
 
 /* Section umum */
@@ -25,67 +35,80 @@
 /* Card box */
 .tentang-card {
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: 24px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    transition: 0.3s ease;
+    box-shadow: 0 10px 40px rgba(82, 121, 111, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(82, 121, 111, 0.05);
 }
 
 .tentang-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 45px rgba(82, 121, 111, 0.12);
+    border-color: rgba(82, 121, 111, 0.1);
 }
 
 /* Icon bulat */
 .tentang-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #2E42F0, #F2C94C);
+    background: linear-gradient(135deg, #52796F, #84A98C);
     color: #fff;
     font-size: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(82, 121, 111, 0.3);
 }
 
 /* Visi & Misi */
 .visi-misi {
-    background: #fdf6e3;
+    background: #fafaf8;
 }
 
 .visi-misi h4 {
-    color: #2E42F0;
+    color: #354F52;
+    font-weight: 700;
 }
 
 /* Sejarah */
 .sejarah {
-    background: linear-gradient(135deg, #2E42F0, #6C7CFF);
+    background: linear-gradient(135deg, #354F52, #52796F);
     color: #fff;
+    border-radius: 30px;
+    padding: 50px;
+    box-shadow: 0 15px 40px rgba(47, 62, 70, 0.2);
 }
 
 .sejarah p {
-    color: #f1f1f1;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
 }
 
 /* Ayat */
 .ayat {
-    background: #fff4cc;
-    border-left: 6px solid #F2C94C;
+    background: #CAD2C5;
+    border-left: 6px solid #84A98C;
     padding: 25px;
     border-radius: 12px;
     font-style: italic;
+    color: #2F3E46;
 }
 
 /* Foto gereja */
 .gereja-img {
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .tentang-page h1 {
         font-size: 2rem;
+    }
+    .sejarah {
+        padding: 30px 20px;
     }
 }

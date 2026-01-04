@@ -59,6 +59,8 @@
         </table>
     </div>
 
-</div>
+<x-hint-button title="Fungsi Data Jemaat">
+    Manajemen data jemaat Gereja Bethania. Anda dapat melihat, mencari, dan memperbarui informasi personal jemaat untuk keperluan administrasi dan pelayanan.
+</x-hint-button>
 
 @endsection

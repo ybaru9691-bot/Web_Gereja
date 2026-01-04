@@ -102,4 +102,8 @@
 
 </div>
 
+<x-hint-button title="Apa itu Dashboard?">
+    Halaman ini memberikan ringkasan data jemaat, warta, dan statistik scan QR code secara real-time untuk memudahkan Anda memantau perkembangan pelayanan Gereja Bethania.
+</x-hint-button>
+
 @endsection

@@ -38,7 +38,7 @@
 <style>
 /* NAVBAR STYLING */
 .navbar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #52796F 0%, #2F3E46 100%) !important;
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
@@ -62,6 +62,7 @@
 /* NAV LINKS */
 .nav-link {
     color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem;
     font-weight: 500;
     padding: 8px 16px !important;
     margin: 0 5px;
@@ -97,7 +98,7 @@
 /* LOGIN BUTTON */
 .btn-login {
     background-color: white;
-    color: #667eea;
+    color: #52796F;
     border: 2px solid white;
     font-weight: 600;
     border-radius: 25px;
