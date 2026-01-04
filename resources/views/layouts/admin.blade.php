@@ -23,6 +23,9 @@
       <link rel="stylesheet" href="{{ asset('css/admin/warta.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/hints.css') }}">
     
+    {{-- Flatpickr --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
 </head>
 <body style="background:#f0f4f2" x-data="{ sidebarOpen: false }">
 
@@ -60,13 +63,13 @@
         <ul class="nav flex-column gap-2">
 
 
-            <li><a href="/admin/dashboard" class="nav-link active">Dashboard</a></li>
-            <li><a href="/admin/jemaat" class="nav-link">Data Jemaat</a></li>
-            <li><a href="/admin/warta" class="nav-link">Warta Jemaat</a></li>
-            <li><a href="/admin/jadwal-ibadah" class="nav-link">Jadwal Ibadah</a></li>
-            <li><a href="/admin/scan" class="nav-link">Scan Log</a></li>
-            <li><a href="/admin/analisis" class="nav-link">Analisis Jemaat</a></li>
-            <li><a href="/admin/keuangan" class="nav-link">Keuangan</a></li>
+            <li><a href="/admin/dashboard" class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">Dashboard</a></li>
+            <li><a href="/admin/jemaat" class="nav-link {{ request()->is('admin/jemaat*') ? 'active' : '' }}">Data Jemaat</a></li>
+            <li><a href="/admin/warta" class="nav-link {{ request()->is('admin/warta*') ? 'active' : '' }}">Warta Jemaat</a></li>
+            <li><a href="/admin/jadwal-ibadah" class="nav-link {{ request()->is('admin/jadwal-ibadah*') ? 'active' : '' }}">Jadwal Ibadah</a></li>
+            <li><a href="/admin/scan" class="nav-link {{ request()->is('admin/scan*') ? 'active' : '' }}">Scan Log</a></li>
+            <li><a href="/admin/analisis" class="nav-link {{ request()->is('admin/analisis*') ? 'active' : '' }}">Analisis Jemaat</a></li>
+            <li><a href="/admin/keuangan" class="nav-link {{ request()->is('admin/keuangan*') ? 'active' : '' }}">Keuangan</a></li>
             <li class="mt-3">
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
@@ -87,29 +90,11 @@
 </div>
 
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
+  // Placeholder for any sidebar initialization if needed
   document.addEventListener('alpine:init', () => {
-    Alpine.data('sidebarMenu', () => ({
-      hovering: false,
-      activeLink: '',
-      init() {
-        const links = this.$el.querySelectorAll('.nav-link');
-        
-
-          
-          // Hover tracking
-          link.addEventListener('mouseenter', () => { this.hovering = true; });
-          link.addEventListener('mouseleave', () => { this.hovering = false; });
-          
-          // Click animation
-          link.addEventListener('click', (e) => {
-            // Remove active from all, add to clicked
-            links.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-          });
-        });
-      }
-    }));
+    // Sidebar logic is handled via x-data on body and :class on aside
   });
   
   // Add pulse animation to new/updated menu items
@@ -122,6 +107,8 @@
     });
   });
 </script>
+
+@yield('scripts')
 
 </body>
 </html>

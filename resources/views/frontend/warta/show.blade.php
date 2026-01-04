@@ -7,11 +7,23 @@
 <div class="warta-detail-container">
 
     {{-- FOTO WARTA --}}
-    @if($warta->file_path)
+    {{-- FOTO WARTA (GALLERY) --}}
+    @if($warta->fotos->count() > 0)
+        <div class="warta-gallery">
+            @foreach($warta->fotos as $foto)
+                <div class="warta-image-wrapper mb-3">
+                    <img src="{{ asset('storage/'.$foto->nama_file) }}"
+                         alt="Foto Warta"
+                         class="warta-image rounded shadow-sm">
+                </div>
+            @endforeach
+        </div>
+    @elseif($warta->file_path)
+        {{-- Fallback untuk data lama --}}
         <div class="warta-image-wrapper">
             <img src="{{ asset('storage/'.$warta->file_path) }}"
                  alt="Foto Warta"
-                 class="warta-image">
+                 class="warta-image rounded shadow-sm">
         </div>
     @endif
 
@@ -34,13 +46,10 @@
     <div class="warta-action">
 
         {{-- DOWNLOAD PDF --}}
-        @if($warta->file_path)
-            <a href="{{ asset('storage/'.$warta->file_path) }}"
-               class="btn-download"
-               download>
-                📄 Download Warta (PDF)
-            </a>
-        @endif
+        <a href="{{ route('warta.download', ['id' => $warta->warta_id]) }}"
+           class="btn-download">
+             📄 Download Warta (PDF)
+        </a>
 
         {{-- QR CODE --}}
         @if($warta->qr_code)

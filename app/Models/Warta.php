@@ -28,4 +28,9 @@ class Warta extends Model
         'status',
         'dibuat_oleh',
     ];
+
+    public function fotos()
+    {
+        return $this->hasMany(WartaFoto::class, 'warta_id', 'warta_id');
+    }
 }

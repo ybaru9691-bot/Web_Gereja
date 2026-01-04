@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Warta;
+use App\Models\WartaFoto;
 
 // ✅ ENDROID QR CODE (VERSI BENAR)
 use Endroid\QrCode\Builder\Builder;
@@ -41,24 +42,35 @@ class WartaController extends Controller
             'tanggal'   => 'required|date',
             'isi_warta' => 'required',
             'status'    => 'required|in:draft,published',
-            'foto'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto.*'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
-        // 🔹 SIMPAN FOTO (JIKA ADA)
-        $path = null;
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('warta', 'public');
-        }
 
         // 🔹 SIMPAN DATA WARTA
         $warta = Warta::create([
             'judul'       => $request->judul,
             'tanggal'     => $request->tanggal,
             'isi_warta'   => $request->isi_warta,
-            'file_path'   => $path,
             'status'      => $request->status,
             'dibuat_oleh' => auth()->id() ?? 1,
         ]);
+
+        // 🔹 SIMPAN FOTO-FOTO (MULTI)
+        if ($request->hasFile('foto')) {
+            foreach ($request->file('foto') as $index => $file) {
+                $path = $file->store('warta', 'public');
+                
+                // Simpan ke tabel warta_foto
+                WartaFoto::create([
+                    'warta_id' => $warta->warta_id,
+                    'nama_file' => $path
+                ]);
+
+                // Sinkronkan ke kolom legacy file_path untuk foto pertama (biar thumbnail lama aman)
+                if ($index === 0) {
+                    $warta->update(['file_path' => $path]);
+                }
+            }
+        }
         
        // 🔥 URL DETAIL WARTA
 $url = route('warta.show', ['id' => $warta->warta_id]);
@@ -94,7 +106,7 @@ $warta->update([
      */
     public function edit($id)
     {
-        $warta = Warta::findOrFail($id);
+        $warta = Warta::with('fotos')->findOrFail($id);
         return view('admin.warta.edit', compact('warta'));
     }
 
@@ -108,15 +120,44 @@ $warta->update([
             'tanggal'   => 'required|date',
             'isi_warta' => 'required',
             'status'    => 'required|in:draft,published',
+            'foto.*'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'hapus_foto.*' => 'nullable|integer'
         ]);
 
         $warta = Warta::findOrFail($id);
+
+        // 🔹 HAPUS FOTO YANG DIPILIH
+        if ($request->has('hapus_foto')) {
+            foreach ($request->hapus_foto as $fotoId) {
+                $foto = WartaFoto::where('warta_id', $warta->warta_id)->find($fotoId);
+                if ($foto) {
+                    Storage::disk('public')->delete($foto->nama_file);
+                    $foto->delete();
+                }
+            }
+        }
+
+        // 🔹 TAMBAH FOTO BARU
+        if ($request->hasFile('foto')) {
+            foreach ($request->file('foto') as $file) {
+                $path = $file->store('warta', 'public');
+                WartaFoto::create([
+                    'warta_id' => $warta->warta_id,
+                    'nama_file' => $path
+                ]);
+            }
+        }
+
         $warta->update([
             'judul'     => $request->judul,
             'tanggal'   => $request->tanggal,
             'isi_warta' => $request->isi_warta,
             'status'    => $request->status,
         ]);
+
+        // Update legacy file_path agar sinkron dengan foto pertama yang tersisa
+        $firstFoto = $warta->fotos()->first();
+        $warta->update(['file_path' => $firstFoto ? $firstFoto->nama_file : null]);
 
         return redirect('/admin/warta')
             ->with('success', 'Warta berhasil diperbarui');

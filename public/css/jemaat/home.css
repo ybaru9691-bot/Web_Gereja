@@ -15,9 +15,9 @@ body {
 }
 
 /* HERO SECTION */
-.hero {
-    background: linear-gradient(135deg, rgba(53, 79, 82, 0.9), rgba(47, 62, 70, 0.95)),
-        url('https://images.unsplash.com/photo-1548625149-fc4a29cf7092?q=80&w=2000&auto=format&fit=crop') center/cover;
+.hero { 
+    background: linear-gradient(135deg, rgba(53, 79, 82, 0.7),  rgba(47, 62, 70, 0.8)),
+        url('/images/galeri4beth.jpg') center/cover;
     padding: 120px 20px 100px;
     color: white;
     position: relative;
@@ -92,11 +92,12 @@ body {
     background: linear-gradient(to right, #fff, #cbd5e1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero p {
-    font-size: 1.1rem;
-    max-width: 700px;
+    font-size: 1.4rem;
+    max-width: 750px;
     margin: 0 auto 2rem;
     color: #e2e8f0;
     font-weight: 400;

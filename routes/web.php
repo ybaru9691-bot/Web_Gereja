@@ -75,6 +75,9 @@ Route::get('/warta', [WartaController::class, 'index'])
 
 Route::get('/warta/{id}', [WartaController::class, 'show'])
     ->name('warta.show');
+
+Route::get('/warta/{id}/download', [WartaController::class, 'downloadPdf'])
+    ->name('warta.download');
  
 Route::get('/jadwal', [JadwalController::class, 'index'])
     ->name('jadwal');

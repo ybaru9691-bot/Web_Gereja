@@ -29,14 +29,14 @@
                     {{-- TANGGAL --}}
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Tanggal Ibadah</label>
-                        <input type="date" name="tanggal" class="form-control" 
+                        <input type="text" id="tanggal" name="tanggal" class="form-control" 
                                value="{{ old('tanggal', $jadwal->tanggal) }}" required>
                     </div>
 
                     {{-- WAKTU --}}
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Waktu Mulai</label>
-                        <input type="time" name="waktu_mulai" class="form-control" 
+                        <input type="text" id="waktu_mulai" name="waktu_mulai" class="form-control" 
                                value="{{ old('waktu_mulai', $jadwal->waktu_mulai) }}" required>
                     </div>
                 </div>
@@ -86,4 +86,27 @@
     </div>
 
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#tanggal", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d/m/y",
+            allowInput: true
+        });
+
+        flatpickr("#waktu_mulai", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i:S",
+            time_24hr: true,
+            altInput: true,
+            altFormat: "H.i/00",
+            allowInput: true
+        });
+    });
+</script>
 @endsection

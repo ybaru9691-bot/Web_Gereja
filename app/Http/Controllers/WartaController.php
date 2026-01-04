@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Warta;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Str;
 
 class WartaController extends Controller
 {
@@ -40,6 +42,19 @@ class WartaController extends Controller
             ->findOrFail($id);
 
         return view('frontend.warta.show', compact('warta'));
+    }
+
+    /**
+     * Download Warta PDF (berisi semua foto)
+     */
+    public function downloadPdf($id)
+    {
+        $warta = Warta::with('fotos')->where('status', 'published')->findOrFail($id);
+
+        $pdf = Pdf::loadView('frontend.warta.pdf', compact('warta'));
+        
+        $filename = 'Warta-' . Str::slug($warta->judul) . '.pdf';
+        return $pdf->download($filename);
     }
 }
 

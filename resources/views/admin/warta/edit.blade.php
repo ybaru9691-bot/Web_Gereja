@@ -31,14 +31,29 @@
                       rows="6"
                       required>{{ old('isi_warta', $warta->isi_warta) }}</textarea>
 
-                      <label>Ganti Foto (opsional)</label>
-               <input type="file" name="foto" accept="image/*">
+                       <label>Tambah Foto Baru (opsional)</label>
+                <input type="file" name="foto[]" accept="image/*" multiple>
 
-                            @if($warta->file_path)
-                                         <br>
-                                 <small>Foto saat ini:</small><br>
-                      <img src="{{ asset('storage/'.$warta->file_path) }}" width="120">
-                                    @endif
+                @if($warta->fotos->count() > 0)
+                    <div class="mt-3">
+                        <label>Foto Saat Ini (Centang untuk hapus):</label>
+                        <div class="d-flex flex-wrap gap-3 mt-2">
+                            @foreach($warta->fotos as $foto)
+                                <div class="text-center">
+                                    <img src="{{ asset('storage/'.$foto->nama_file) }}" 
+                                         class="rounded mb-1" 
+                                         style="width: 120px; height: 120px; object-fit: cover; border: 1px solid #ddd;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="hapus_foto[]" value="{{ $foto->id }}" id="foto{{ $foto->id }}">
+                                        <label class="form-check-label text-danger" for="foto{{ $foto->id }}">
+                                            Hapus
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
 
 
             <label>Status</label>

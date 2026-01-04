@@ -146,37 +146,37 @@
         <h4 class="fw-bold text-center mb-4">Galeri Foto</h4>
         <div class="row g-3">
             <div class="col-md-4 col-6">
-                <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=500" 
+                <img src="{{ asset('images/galeri1beth.jpg') }}" 
                      alt="Gereja" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; object-fit: cover; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=500" 
+                <img src="{{ asset('images/galeribeth2.jpg') }}" 
                      alt="Ibadah" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; object-fit: cover; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500" 
+                <img src="{{ asset('images/galeri3beth.jpg') }}" 
                      alt="Pemuda" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; object-fit: cover; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500" 
+                <img src="{{ asset('images/galeri4beth.jpg') }}" 
                      alt="Persekutuan" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; object-fit: cover; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500" 
+                <img src="{{ asset('images/galeri5.jpg') }}" 
                      alt="Pelayanan" 
                      class="img-fluid rounded shadow-sm"
-                     style="height: 200px; object-fit: cover; width: 100%;">
+                     style="height: 200px; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="https://images.unsplash.com/photo-1519491050282-cf00c82424b4?w=500" 
+                <img src="{{ asset('images/galeribethania6.jpeg') }}" 
                      alt="Komunitas" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; object-fit: cover; width: 100%;">

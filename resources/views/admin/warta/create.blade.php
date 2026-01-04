@@ -19,8 +19,8 @@
             <label>Isi Warta</label>
             <textarea name="isi_warta" rows="6" required></textarea>
 
-            <label>Foto Warta</label>
-              <input type="file" name="foto" accept="image/*">
+            <label>Foto Warta (Bisa pilih lebih dari satu)</label>
+              <input type="file" name="foto[]" accept="image/*" multiple>
 
 
             <input type="hidden" name="status" id="status">
