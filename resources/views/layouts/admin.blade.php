@@ -42,9 +42,9 @@
             <li><a href="/admin/jemaat" class="nav-link">Data Jemaat</a></li>
             <li><a href="/admin/warta" class="nav-link">Warta Jemaat</a></li>
             <li><a href="/admin/jadwal-ibadah" class="nav-link">Jadwal Ibadah</a></li>
-            <li><a href="#" class="nav-link">Scan Log</a></li>
-            <li><a href="#" class="nav-link">Analisis Jemaat</a></li>
-            <li><a href="#" class="nav-link">Keuangan</a></li>
+            <li><a href="/admin/scan" class="nav-link">Scan Log</a></li>
+            <li><a href="/admin/analisis" class="nav-link">Analisis Jemaat</a></li>
+            <li><a href="/admin/keuangan" class="nav-link">Keuangan</a></li>
             <li class="mt-3">
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
