@@ -170,7 +170,7 @@
                      style="height: 200px; object-fit: cover; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="{{ asset('images/galeri5.jpg') }}" 
+                <img src="{{ asset('images/galeribethania3.jpg') }}" 
                      alt="Pelayanan" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; width: 100%;">

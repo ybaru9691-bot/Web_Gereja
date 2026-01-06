@@ -11,11 +11,12 @@
     </p>
 
     {{-- HEADER --}}
-    <div class="row jadwal-header text-center rounded-pill py-2 mb-3">
+    <div class="row jadwal-header text-center rounded-pill py-2 mb-3 align-items-center">
         <div class="col-md-3">Hari / Tanggal</div>
-        <div class="col-md-3">Jam Ibadah</div>
+        <div class="col-md-2">Jam Ibadah</div>
         <div class="col-md-3">Jenis Ibadah</div>
-        <div class="col-md-3">Lokasi</div>
+        <div class="col-md-2">Lokasi</div>
+        <div class="col-md-2">Detail</div>
     </div>
 
     {{-- DATA --}}
@@ -45,11 +46,9 @@
         <div class="col-md-2">
            <a href="{{ route('jadwal.show', $item->id_jadwal) }}"
                class="btn btn-sm btn-primary">
-      Lihat Detail
-                </a>
-
+                Lihat Detail
+            </a>
         </div>
-
     </div>
 @empty
 

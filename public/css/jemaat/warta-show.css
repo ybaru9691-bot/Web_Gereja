@@ -65,3 +65,19 @@
     width: 120px;
     margin-bottom: 5px;
 }
+
+/* CAROUSEL ENHANCEMENTS */
+.warta-carousel-img {
+    height: 450px;
+    object-fit: cover;
+    cursor: zoom-in;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #354F52;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}

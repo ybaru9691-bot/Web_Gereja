@@ -19,9 +19,11 @@
 
 body {
     /* Ensure body doesn't fight with sidebar */
-    background-color: #CAD2C5;
-    /* Light slate background for content area */
+    background-color: #f0f4f2 !important;
+    /* Match the inline style in admin.blade.php */
     font-family: 'Dubai', sans-serif !important;
+    margin: 0;
+    padding: 0;
 }
 
 * {
@@ -335,15 +337,54 @@ body {
 }
 
 @media (max-width: 768px) {
-    .admin-sidebar {
+    .admin-sidebar,
+    .pendeta-sidebar {
         transform: translateX(-100%);
     }
 
-    .admin-sidebar.show {
+    .admin-sidebar.show,
+    .pendeta-sidebar.show {
         transform: translateX(0);
     }
 
     main {
         margin-left: 0 !important;
+        padding: 4.5rem 1rem 1rem !important; /* Increased top padding */
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .mobile-toggle-btn {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        background: var(--sidebar-bg);
+        color: white;
+        border: 1px solid var(--sidebar-border);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1001; /* Higher than sidebar */
+        font-size: 1.4rem;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-toggle-btn:active {
+        transform: scale(0.9);
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 998;
     }
 }

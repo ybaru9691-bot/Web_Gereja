@@ -20,7 +20,7 @@ class WartaController extends Controller
      */
     public function index()
     {
-        $wartas = Warta::orderBy('tanggal', 'desc')->get();
+        $wartas = Warta::latest()->get();
         return view('admin.warta.index', compact('wartas'));
     }
 

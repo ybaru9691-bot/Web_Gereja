@@ -27,7 +27,7 @@ class WartaController extends Controller
                   ->whereYear('tanggal', now()->year);
         }
 
-        $wartas = $query->orderBy('tanggal', 'desc')->get();
+        $wartas = $query->latest()->get();
 
         return view('frontend.warta.index', compact('wartas'));
     }

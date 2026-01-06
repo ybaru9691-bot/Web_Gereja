@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
 
     {{-- Pendeta Dashboard Styles --}}
-    <link rel="stylesheet" href="{{ asset('css/pendeta/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pendeta/pendeta.css') }}">
 
     <!-- Font Awesome for icons -->
     <!-- Bootstrap Icons -->
@@ -24,20 +24,38 @@
 
     
 </head>
-<body style="background:#f5f5f5">
+<body style="background:#f5f5f5" x-data="{ sidebarOpen: false }">
 
 <div class="d-flex">
     
+    {{-- BACKDROP (Mobile Only) --}}
+    <div 
+        class="sidebar-overlay" 
+        x-show="sidebarOpen" 
+        @click="sidebarOpen = false"
+        x-transition:opacity
+    ></div>
+
+    {{-- BURGER BUTTON (Mobile Only) --}}
+    <button 
+        class="mobile-toggle-btn d-md-none" 
+        @click="sidebarOpen = !sidebarOpen"
+    >
+        <i class="bi bi-list"></i>
+    </button>
+    
     {{-- SIDEBAR --}}
-    <aside class="pendeta-sidebar p-3">
+    <aside 
+        class="pendeta-sidebar p-3"
+        :class="{ 'show': sidebarOpen }"
+    >
         <div class="text-center mb-4">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <div class="logo-circle mb-2"><i class="fas fa-church"></i></div>
-                    <strong>Gereja Bethania</strong><br>
-                    <small>Dashboard Pendeta</small>
+            <div class="profile-section">
+                <div class="logo-circle mb-3 mx-auto">
+                    <img src="{{ asset('images/Logo HKBP.png') }}" alt="Logo HKBP" class="img-fluid rounded-circle">
                 </div>
-                <button id="pendetaSidebarClose" class="btn btn-sm btn-outline-light d-lg-none pendeta-close"><i class="fas fa-times"></i></button>
+                <h5 class="fw-bold text-white mb-1">Gereja Bethania</h5>
+                <small class="text-white-50">Dashboard Pendeta</small>
             </div>
         </div>
 
@@ -60,6 +78,12 @@
                     <span>Keuangan</span>
                 </a>
             </li>
+            <li>
+                <a href="/pendeta/analisis" class="nav-link {{ request()->is('pendeta/analisis*') ? 'active' : '' }}" title="Analisis">
+                    <i class="bi bi-graph-up"></i>
+                    <span>Analisis</span>
+                </a>
+            </li>
             
             <li class="mt-auto pt-3" style="border-top: 1px solid rgba(255, 255, 255, 0.06);">
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
@@ -73,16 +97,8 @@
         </ul>
     </aside>
 
-    {{-- Overlay for mobile sidebar --}}
-    <div id="pendeta-overlay" class="sidebar-overlay"></div>
-
     {{-- CONTENT --}}
     <main class="flex-fill p-4">
-        <!-- Mobile: sidebar toggle button -->
-        <button id="pendetaSidebarToggle" class="btn btn-outline-secondary d-lg-none mb-3">
-            <i class="fas fa-bars"></i>
-        </button>
-
         @yield('content')
     </main>
 
@@ -91,72 +107,12 @@
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 <script>
   document.addEventListener('alpine:init', () => {
-    Alpine.data('sidebarMenu', () => ({
-      hovering: false,
-      activeLink: '',
-      init() {
-        const links = this.$el.querySelectorAll('.nav-link');
-          
-          // Hover tracking
-          links.forEach(link => {
-            link.addEventListener('mouseenter', () => { this.hovering = true; });
-            link.addEventListener('mouseleave', () => { this.hovering = false; });
-          });
-      }
-    }));
+    // Sidebar logic is handled via x-data on body and :class on aside
   });
   
-  // Add pulse animation to new/updated menu items
+  // Add pulse animation to items if needed
   document.addEventListener('DOMContentLoaded', () => {
-    const menuLinks = document.querySelectorAll('.nav-link');
-    menuLinks.forEach((link, index) => {
-      if (index === 1) { // Pengumuman as example
-        // Uncomment to enable pulse: link.classList.add('pulse');
-      }
-    });
-
-    // Mobile sidebar toggle
-    const toggle = document.getElementById('pendetaSidebarToggle');
-    const sidebar = document.querySelector('.pendeta-sidebar');
-    const overlay = document.getElementById('pendeta-overlay');
-
-    function openSidebar(){
-      sidebar.classList.add('active');
-      overlay.classList.add('active');
-      document.body.classList.add('no-scroll');
-    }
-
-    function closeSidebar(){
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-      document.body.classList.remove('no-scroll');
-    }
-
-    if (toggle && sidebar && overlay){
-      // Ensure sidebar is closed initially on small screens
-      if (window.innerWidth <= 991) closeSidebar();
-
-      toggle.addEventListener('click', (e) => { e.stopPropagation(); openSidebar(); });
-      overlay.addEventListener('click', closeSidebar);
-
-      // Close button inside sidebar (mobile)
-      const closeBtn = document.getElementById('pendetaSidebarClose');
-      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
-
-      // Close on escape
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
-
-      // Close/open on resize if crossing breakpoint
-      let lastWidth = window.innerWidth;
-      window.addEventListener('resize', () => {
-        const w = window.innerWidth;
-        if ((lastWidth > 991 && w <= 991)) {
-          // entered mobile size
-          closeSidebar();
-        }
-        lastWidth = w;
-      });
-    }
+    // any extra DOM manipulations
   });
 </script>
 

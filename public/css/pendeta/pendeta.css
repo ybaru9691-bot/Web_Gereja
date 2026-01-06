@@ -17,10 +17,36 @@
 }
 
 .logo-circle {
-    width: 70px;
-    height: 70px;
-    background: #8cc9dc;
+    width: 80px;
+    height: 80px;
+    background: white;
     border-radius: 50%;
-    line-height: 70px;
-    color: white;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.profile-section {
+    padding-top: 1rem;
+}
+
+.profile-section h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.profile-section small {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.8;
 }

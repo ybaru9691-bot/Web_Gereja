@@ -21,6 +21,36 @@
     color: #333;
 }
 
+@media (max-width: 768px) {
+    .page-container {
+        padding: 50px 10px 20px; /* Space for top-left burger */
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 15px;
+    }
+
+    .page-header div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-title {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+    }
+}
+
 /* CARD */
 .card {
     background: #ffffff;
@@ -48,6 +78,22 @@
 
 .data-table tbody tr:hover {
     background: #fff4f8;
+}
+
+.table-responsive {
+    margin: 0 -20px; /* Overflow the card's padding if any */
+}
+
+@media (max-width: 768px) {
+    .table-responsive {
+        margin: 0;
+    }
+    
+    .data-table th, 
+    .data-table td {
+        white-space: nowrap;
+        padding: 10px 15px;
+    }
 }
 
 /* STATUS */

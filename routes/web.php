@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\JemaatController;
 use App\Http\Controllers\Admin\WartaController as AdminWartaController;
 
 use App\Http\Controllers\Pendeta\PengumumanController as PendetaPengumumanController;
+use App\Http\Controllers\Pendeta\AnalisisController as PendetaAnalisisController;
 use App\Models\Pengumuman;
 use App\Models\Warta;
 
@@ -196,4 +197,5 @@ Route::prefix('pendeta')->group(function () {
     Route::get('/pengumuman/{id}/edit', [PendetaPengumumanController::class, 'edit']);
     Route::put('/pengumuman/{id}', [PendetaPengumumanController::class, 'update']);
     Route::delete('/pengumuman/{id}', [PendetaPengumumanController::class, 'destroy']);
+    Route::get('/analisis', [PendetaAnalisisController::class, 'index'])->name('pendeta.analisis');
 });
