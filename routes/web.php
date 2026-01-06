@@ -169,6 +169,14 @@ Route::delete('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'destroy'])
 // ================= SCAN LOG =================
 Route::get('/scan', [ScanLogController::class, 'index'])
     ->name('admin.scan.index');
+
+    // ================= ANALISIS JEMAAT =================
+Route::get('/analisis', [\App\Http\Controllers\Admin\AnalisisClusterController::class, 'index'])
+    ->name('admin.analisis.index');
+
+Route::post('/analisis/hitung', [\App\Http\Controllers\Admin\AnalisisClusterController::class, 'hitung'])
+    ->name('admin.analisis.hitung');
+
 });
 
 

@@ -6,12 +6,13 @@ use App\Models\ScanLog;
 use App\Models\JadwalIbadah;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 
 class ScanController extends Controller
 {
     public function scan($id_jadwal)
     {
-        // 1️⃣ Ambil jadwal ibadah (INI YANG KAMU LUPA)
+        // 1️⃣ Ambil jadwal ibadah
         $jadwal = JadwalIbadah::where('id_jadwal', $id_jadwal)->firstOrFail();
 
         // 2️⃣ Waktu sekarang
@@ -22,32 +23,34 @@ class ScanController extends Controller
             $jadwal->tanggal . ' ' . $jadwal->waktu_mulai
         );
 
-        // 4️⃣ Hitung selisih menit
-       if ($now->lessThanOrEqualTo($waktuMulai)) {
-    // Scan sebelum atau tepat waktu ibadah
-    $kehadiran = 'tepat';
-} else {
-    // Scan setelah ibadah dimulai
-    $selisih = $waktuMulai->diffInMinutes($now);
+        // 4️⃣ Tentukan status kehadiran
+        if ($now->lessThanOrEqualTo($waktuMulai)) {
+            $kehadiran = 'tepat';
+        } else {
+            $selisih = $waktuMulai->diffInMinutes($now);
 
-    if ($selisih <= 5) {
-        $kehadiran = 'tepat';
-    } elseif ($selisih <= 15) {
-        $kehadiran = 'terlambat';
-    } else {
-        $kehadiran = 'terlambat_berat';
-    }
-}
-
-
-        // 5️⃣ Guest UUID (ID palsu)
-        if (!session()->has('guest_uuid')) {
-            session(['guest_uuid' => (string) Str::uuid()]);
+            if ($selisih <= 5) {
+                $kehadiran = 'tepat';
+            } elseif ($selisih <= 15) {
+                $kehadiran = 'terlambat';
+            } else {
+                $kehadiran = 'terlambat_berat';
+            }
         }
 
-        $guest_uuid = session('guest_uuid');
+        // 5️⃣ Guest UUID (SESSION + COOKIE → STABIL)
+        if (Cookie::has('guest_uuid')) {
+            $guest_uuid = Cookie::get('guest_uuid');
+        } elseif (session()->has('guest_uuid')) {
+            $guest_uuid = session('guest_uuid');
+        } else {
+            $guest_uuid = (string) Str::uuid();
 
-        // 6️⃣ Cegah scan ganda
+            session(['guest_uuid' => $guest_uuid]);
+            Cookie::queue('guest_uuid', $guest_uuid, 60 * 24 * 30); // 30 hari
+        }
+
+        // 6️⃣ Cegah scan ganda pada jadwal yang sama
         $alreadyScan = ScanLog::where('guest_uuid', $guest_uuid)
             ->where('jadwal_id', $jadwal->id_jadwal)
             ->exists();
@@ -59,7 +62,7 @@ class ScanController extends Controller
             ]);
         }
 
-        // 7️⃣ Simpan scan
+        // 7️⃣ Simpan scan log
         ScanLog::create([
             'guest_uuid'       => $guest_uuid,
             'jadwal_id'        => $jadwal->id_jadwal,
