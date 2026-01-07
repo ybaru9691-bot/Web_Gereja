@@ -30,7 +30,7 @@
     </main>
 
     <footer class="text-center mt-5">
-        <p>2025 Gereja, hak cipta dilindungi oleh rafael wkwkwwk</p>
+        <p>2025 Gereja, hak cipta dilindungi </p>
     </footer>
 
     {{-- Bootstrap JS --}}
