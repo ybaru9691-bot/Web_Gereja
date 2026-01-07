@@ -1,27 +1,43 @@
-    /* ===== PAGE ===== */
-    .page-container {
-        padding: 20px;
-    }
+/* =========================
+   ADMIN DATA PAGES - MODERN TABLE DESIGN
+========================= */
 
-    /* ===== HEADER ===== */
-    .page-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-    }
-
-    .page-title {
-        font-size: 22px;
-        font-weight: 600;
-        color: #333;
-    }
+/* ===== PAGE CONTAINER ===== */
+.page-container {
+    padding: 24px;
+}
 
 @media (max-width: 768px) {
     .page-container {
-        padding: 50px 10px 20px;
+        padding: 50px 12px 20px;
     }
+}
 
+/* ===== PAGE HEADER ===== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-title i {
+    color: #e56aa0;
+}
+
+@media (max-width: 768px) {
     .page-header {
         flex-direction: column;
         align-items: flex-start !important;
@@ -29,92 +45,313 @@
     }
 
     .page-title {
-        font-size: 18px;
-    }
-
-    .btn-primary {
-        width: 100%;
-        text-align: center;
-        padding: 12px;
+        font-size: 20px;
     }
 }
 
-    /* ===== BUTTON FEMININ ===== */
-    .btn-primary {
-        background: linear-gradient(135deg, #f08db3, #e56aa0);
-        color: #fff;
-        padding: 10px 18px;
-        border-radius: 20px;
-        text-decoration: none;
-        font-size: 14px;
-        transition: 0.2s;
-    }
+/* ===== BUTTONS ===== */
+.btn-primary {
+    background: linear-gradient(135deg, #f08db3 0%, #e56aa0 100%);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(229, 106, 160, 0.3);
+}
 
-    .btn-primary:hover {
-        opacity: 0.9;
-    }
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 106, 160, 0.4);
+    color: #fff;
+}
 
-    /* ===== CARD ===== */
-    .card {
-        background: #ffffff;
-        padding: 16px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    /* ===== TABLE ===== */
-    .data-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .data-table thead {
-        background: #fde6ef;
-    }
-
-    .data-table th {
-        text-align: left;
-        padding: 12px;
-        font-size: 14px;
-        color: #555;
-    }
-
-    .data-table td {
-        padding: 12px;
-        font-size: 14px;
-        border-bottom: 1px solid #f1f1f1;
-    }
-
-    .data-table tbody tr:hover {
-        background: #fff4f8;
-    }
+.btn-primary:active {
+    transform: translateY(0);
+}
 
 @media (max-width: 768px) {
-    .data-table th, 
-    .data-table td {
-        white-space: nowrap;
-        padding: 10px 15px;
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
     }
 }
 
-    /* ===== EMPTY ===== */
-    .empty-text {
-        text-align: center;
-        padding: 20px;
-        color: #888;
-        font-style: italic;
-    }
-
- .action-cell {
-    display: flex;
-    gap: 8px;
-    flex-wrap: nowrap;
-    justify-content: center;
-    white-space: nowrap;
+/* ===== TABLE CARD ===== */
+.card,
+.table-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: none;
 }
 
-.data-table td,
-.data-table th {
+.card-body {
+    padding: 0;
+}
+
+/* ===== MODERN TABLE ===== */
+.data-table,
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead,
+.modern-table thead {
+    background: linear-gradient(135deg, #fde6ef 0%, #f8d7e8 100%);
+}
+
+.data-table thead th,
+.modern-table thead th {
+    padding: 16px 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: #5a5a5a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #f8d7e8;
+}
+
+.data-table tbody tr,
+.modern-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.data-table tbody tr:hover,
+.modern-table tbody tr:hover {
+    background: linear-gradient(135deg, #fff9fb 0%, #fff4f8 100%);
+}
+
+.data-table tbody td,
+.modern-table tbody td {
+    padding: 14px;
+    font-size: 14px;
+    color: #444;
+    border-bottom: 1px solid #f5f5f5;
     vertical-align: middle;
 }
 
+.data-table tbody tr:last-child td,
+.modern-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .data-table th, 
+    .data-table td,
+    .modern-table th,
+    .modern-table td {
+        white-space: nowrap;
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+    }
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-text,
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #aaa;
+    font-style: normal;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #ddd;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.empty-state p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.action-cell {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.btn-edit,
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Edit Button - Soft Blue */
+.btn-edit {
+    background: linear-gradient(135deg, #e8f4fd 0%, #d0e8f9 100%);
+    color: #2980b9;
+    border: 1px solid rgba(41, 128, 185, 0.2);
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);
+}
+
+.btn-edit:active {
+    transform: translateY(0);
+}
+
+/* Delete Button - Soft Pink/Red */
+.btn-delete {
+    background: linear-gradient(135deg, #fdeaea 0%, #f9d0d0 100%);
+    color: #c0392b;
+    border: 1px solid rgba(192, 57, 43, 0.2);
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
+}
+
+.btn-delete:active {
+    transform: translateY(0);
+}
+
+.btn-edit i,
+.btn-delete i {
+    font-size: 14px;
+}
+
+/* ===== BADGES ===== */
+.badge-published,
+.badge-success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-draft,
+.badge-warning {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+    color: #856404;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    color: #721c24;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-secondary {
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    color: #495057;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+    color: #0c5460;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ===== ALERT MODERN ===== */
+.alert-modern {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: none;
+    border-left: 4px solid #28a745;
+    border-radius: 8px;
+    padding: 14px 18px;
+    color: #155724;
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ===== DATE & UUID CELLS ===== */
+.date-cell {
+    color: #6c757d;
+    font-size: 13px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.uuid-cell {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 12px;
+    color: #6c757d;
+    cursor: help;
+}
+
+/* ===== NUMBER/INDEX CELL ===== */
+.index-cell {
+    font-weight: 600;
+    color: #888;
+    width: 50px;
+    text-align: center;
+}

@@ -84,6 +84,14 @@
                             {{ Str::limit(strip_tags($warta->isi_warta), 100, '...') }}
                         </p>
 
+                        @if($warta->fotos->count() > 0 || $warta->file_path)
+                        <div class="mb-3 position-relative" style="z-index: 5;">
+                            <a href="{{ route('warta.download', ['id' => $warta->warta_id]) }}" class="btn btn-outline-forest btn-sm w-100 rounded-pill">
+                                <i class="bi bi-download me-1"></i> Download PDF
+                            </a>
+                        </div>
+                        @endif
+
                         <div class="d-flex justify-content-between align-items-center pt-3 border-top">
                             <small class="text-muted">
                                 <i class="bi bi-person-circle me-1"></i> Majelis Jemaat

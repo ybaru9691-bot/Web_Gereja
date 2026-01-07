@@ -18,10 +18,14 @@
     {{-- Pendeta Dashboard Styles --}}
     <link rel="stylesheet" href="{{ asset('css/pendeta/pendeta.css') }}">
 
+
+
     <!-- Font Awesome for icons -->
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    
+    {{-- Bootstrap JS Bundle (includes Popper) --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
 </head>
 <body style="background:#f5f5f5" x-data="{ sidebarOpen: false }">
@@ -61,25 +65,29 @@
 
         <ul class="nav flex-column gap-2">
             <li>
-                <a href="/pendeta/dashboard" class="nav-link {{ request()->is('pendeta/dashboard') ? 'active' : '' }}" title="Dashboard">
+                <a href="/pendeta/dashboard" class="nav-link {{ request()->is('pendeta/dashboard') ? 'active' : '' }}" 
+                   data-bs-toggle="tooltip" data-bs-placement="right" title="Ringkasan data Gereja">
                     <i class="bi bi-speedometer2"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/pendeta/pengumuman" class="nav-link {{ request()->is('pendeta/pengumuman*') ? 'active' : '' }}" title="Pengumuman">
+                <a href="/pendeta/pengumuman" class="nav-link {{ request()->is('pendeta/pengumuman*') ? 'active' : '' }}"
+                   data-bs-toggle="tooltip" data-bs-placement="right" title="Tambahkan pengumuman/renungan">
                     <i class="bi bi-megaphone"></i>
                     <span>Pengumuman</span>
                 </a>
             </li>
             <li>
-                <a href="/pendeta/keuangan" class="nav-link {{ request()->is('pendeta/keuangan*') ? 'active' : '' }}" title="Keuangan">
+                <a href="/pendeta/keuangan" class="nav-link {{ request()->is('pendeta/keuangan*') ? 'active' : '' }}"
+                   data-bs-toggle="tooltip" data-bs-placement="right" title="Laporan & monitoring keuangan">
                     <i class="bi bi-cash-coin"></i>
                     <span>Keuangan</span>
                 </a>
             </li>
             <li>
-                <a href="/pendeta/analisis" class="nav-link {{ request()->is('pendeta/analisis*') ? 'active' : '' }}" title="Analisis">
+                <a href="/pendeta/analisis" class="nav-link {{ request()->is('pendeta/analisis*') ? 'active' : '' }}"
+                   data-bs-toggle="tooltip" data-bs-placement="right" title="Visualisasi data jemaat">
                     <i class="bi bi-graph-up"></i>
                     <span>Analisis</span>
                 </a>
@@ -104,6 +112,7 @@
 
 </div>
 
+
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 <script>
   document.addEventListener('alpine:init', () => {
@@ -112,7 +121,11 @@
   
   // Add pulse animation to items if needed
   document.addEventListener('DOMContentLoaded', () => {
-    // any extra DOM manipulations
+    // Initialize Bootstrap Tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
   });
 </script>
 

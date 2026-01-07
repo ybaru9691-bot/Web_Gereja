@@ -6,12 +6,16 @@
 
     <div class="page-header align-items-start">
         <div>
-            <h2 class="page-title">Kelola Warta Gereja</h2>
+            <h2 class="page-title">
+                <i class="bi bi-newspaper"></i>
+                Kelola Warta Gereja
+            </h2>
         </div>
 
         <div class="d-flex flex-column align-items-end gap-2">
             <a href="{{ url('/admin/warta/create') }}" class="btn-primary">
-                + Tambah Warta
+                <i class="bi bi-plus-lg"></i>
+                Tambah Warta
             </a>
         </div>
     </div>
@@ -64,6 +68,7 @@
                         <td class="action-cell">
                             <a href="{{ url('/admin/warta/'.$w->warta_id.'/edit') }}"
                                class="btn-edit">
+                                <i class="bi bi-pencil-square"></i>
                                 Edit
                             </a>
 
@@ -76,6 +81,7 @@
                                 <button type="submit"
                                         class="btn-delete"
                                         onclick="return confirm('Yakin ingin menghapus warta ini?')">
+                                    <i class="bi bi-trash3"></i>
                                     Hapus
                                 </button>
                             </form>
@@ -83,8 +89,11 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="empty-text">
-                            Belum ada warta 
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <i class="bi bi-newspaper"></i>
+                                <p>Belum ada warta</p>
+                            </div>
                         </td>
                     </tr>
                 @endforelse

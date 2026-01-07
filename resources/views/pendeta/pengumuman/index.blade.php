@@ -10,7 +10,7 @@
 <div class="d-flex justify-content-between align-items-start mb-4">
     <div>
         <h2 class="fw-bold">Pengumuman</h2>
-        <p class="text-muted mb-1">Kelola pengumuman gereja serta pantau ringkasan publikasi.</p>
+        <p class="text-muted mb-1">Buat pengumuman Gereja yang dapat di lihat oleh jemaat.</p>
     </div>
     <div>
         <a href="{{ url('/pendeta/pengumuman/create') }}" class="btn btn-primary">Buat Pengumuman</a>

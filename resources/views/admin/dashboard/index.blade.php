@@ -26,7 +26,7 @@
     <div class="col-6 col-md-3">
         <div class="bg-white p-3 rounded shadow-sm h-100">
             <small class="text-muted d-block mb-1">Scan Mingguan</small>
-            <h4 class="fw-bold mb-2">137</h4>
+            <h4 class="fw-bold mb-2">{{ $weeklyScanCount ?? 0 }}</h4>
             <span class="badge bg-primary">QR Code</span>
         </div>
     </div>
@@ -62,10 +62,52 @@
                 <span class="badge bg-primary">Minggu</span>
             </div>
 
-            <div class="p-5 text-center text-muted border rounded">
-                Grafik akan ditampilkan di sini  
-                <br><small>(Chart.js nanti)</small>
+            <div style="height: 300px;">
+                <canvas id="jemaatChart"></canvas>
             </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('jemaatChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Disiplin', 'Cukup Disiplin', 'Tidak Disiplin'],
+                        datasets: [{
+                            label: 'Jumlah Jemaat',
+                            data: @json($chartData),
+                            backgroundColor: [
+                                'rgba(40, 167, 69, 0.7)',  // Success/Green for Disiplin
+                                'rgba(255, 193, 7, 0.7)',  // Warning/Yellow for Cukup Disiplin
+                                'rgba(220, 53, 69, 0.7)'   // Danger/Red for Tidak Disiplin
+                            ],
+                            borderColor: [
+                                'rgb(40, 167, 69)',
+                                'rgb(255, 193, 7)',
+                                'rgb(220, 53, 69)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            </script>
         </div>
     </div>
 

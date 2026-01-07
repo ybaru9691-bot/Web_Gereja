@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin/tambah.css') }}">
       <link rel="stylesheet" href="{{ asset('css/admin/warta.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/hints.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/analisis.css') }}">
     
     {{-- Flatpickr --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -52,12 +53,13 @@
         :class="{ 'show': sidebarOpen }"
     >
         <div class="text-center mb-4">
-            <img src="{{ asset('images/Logo HKBP.png') }}"
-                 alt="Logo"
-                 class="mb-2"
-                 style="width: 5rem; height: 5rem; object-fit: contain;">
-            <strong>Gereja Bethania</strong><br>
-            <small>Dashboard Admin</small>
+            <div class="profile-section">
+                <div class="logo-circle mb-3 mx-auto">
+                    <img src="{{ asset('images/Logo HKBP.png') }}" alt="Logo HKBP" class="img-fluid rounded-circle">
+                </div>
+                <h5 class="fw-bold mb-1">Gereja Bethania</h5>
+                <small class="text-muted">Dashboard Admin</small>
+            </div>
         </div>
 
         <ul class="nav flex-column gap-2">

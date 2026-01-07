@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\JadwalIbadahController;
   use App\Http\Controllers\JadwalController;
   use App\Http\Controllers\ScanController;
 use App\Http\Controllers\Admin\ScanLogController;
+use App\Models\ScanLog;
+use Carbon\Carbon;
 
   
 
@@ -106,14 +108,50 @@ Route::get('/contact', function () {
 Route::get('/admin/dashboard', function () {
     $wartaCount = Warta::count();
     $jemaatCount = \App\Models\Jemaat::count();
-    return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount'));
+
+    // Data analisis cluster
+    $clusters = \App\Models\AnalisisCluster::select('cluster_label', DB::raw('count(*) as total'))
+        ->groupBy('cluster_label')
+        ->pluck('total', 'cluster_label')
+        ->toArray();
+
+    $labels = ['Disiplin', 'Cukup Disiplin', 'Tidak Disiplin'];
+    $chartData = [];
+    foreach ($labels as $label) {
+        $chartData[] = $clusters[$label] ?? 0;
+    }
+
+    $weeklyScanCount = ScanLog::whereBetween('waktu_scan', [
+        Carbon::now()->startOfWeek(),
+        Carbon::now()->endOfWeek()
+    ])->count();
+
+    return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount', 'chartData', 'weeklyScanCount'));
 })->name('admin.dashboard');
 
 Route::get('/pendeta/dashboard', function () {
     $wartaCount = \App\Models\Warta::count();
     $pengumumanCount = \App\Models\Pengumuman::count();
     $jemaatCount = \App\Models\Jemaat::count();
-    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount', 'jemaatCount'));
+
+    // Data analisis cluster
+    $clusters = \App\Models\AnalisisCluster::select('cluster_label', DB::raw('count(*) as total'))
+        ->groupBy('cluster_label')
+        ->pluck('total', 'cluster_label')
+        ->toArray();
+
+    $labels = ['Disiplin', 'Cukup Disiplin', 'Tidak Disiplin'];
+    $chartData = [];
+    foreach ($labels as $label) {
+        $chartData[] = $clusters[$label] ?? 0;
+    }
+
+    $weeklyScanCount = ScanLog::whereBetween('waktu_scan', [
+        Carbon::now()->startOfWeek(),
+        Carbon::now()->endOfWeek()
+    ])->count();
+
+    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount', 'jemaatCount', 'chartData', 'weeklyScanCount'));
 })->name('pendeta.dashboard');
 
 /*

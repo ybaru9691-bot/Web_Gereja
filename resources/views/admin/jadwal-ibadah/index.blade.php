@@ -3,101 +3,112 @@
 @section('title', 'Jadwal Ibadah')
 
 @section('content')
-<div class="container-fluid">
+<div class="page-container">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>Jadwal Ibadah</h4>
-        <a href="{{ url('/admin/jadwal-ibadah/create') }}" class="btn btn-primary">
-            + Tambah Jadwal
+    <div class="page-header">
+        <h2 class="page-title">
+            <i class="bi bi-calendar-event-fill"></i>
+            Jadwal Ibadah
+        </h2>
+        <a href="{{ url('/admin/jadwal-ibadah/create') }}" class="btn-primary">
+            <i class="bi bi-plus-lg"></i>
+            Tambah Jadwal
         </a>
     </div>
 
     {{-- ALERT SUCCESS --}}
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert-modern">
+            <i class="bi bi-check-circle-fill"></i>
             {{ session('success') }}
         </div>
     @endif
 
     <div class="card">
-        <div class="card-body table-responsive">
-
-            <table class="table table-bordered table-hover">
-                <thead class="table-light">
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Waktu</th>
+                        <th style="width:60px">No</th>
+                        <th><i class="bi bi-calendar3"></i> Tanggal</th>
+                        <th><i class="bi bi-clock"></i> Waktu</th>
                         <th>Jenis Ibadah</th>
-                        <th>Lokasi</th>
+                        <th><i class="bi bi-geo-alt"></i> Lokasi</th>
                         <th>Pelayan</th>
                         <th>Status</th>
-                         <th>Aksi</th>
+                        <th style="width:180px">Aksi</th>
                     </tr>
                 </thead>
 
-             <tbody>
-@forelse ($jadwal as $item)
-<tr>
-    <td>{{ $loop->iteration }}</td>
+                <tbody>
+                    @forelse ($jadwal as $item)
+                    <tr>
+                        <td class="index-cell">{{ $loop->iteration }}</td>
 
-    <td>
-        {{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
-    </td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
 
-    <td>
-        {{ substr($item->waktu_mulai, 0, 5) }}
-        @if($item->waktu_selesai)
-            – {{ substr($item->waktu_selesai, 0, 5) }}
-        @endif
-    </td>
+                        <td>
+                            {{ substr($item->waktu_mulai, 0, 5) }}
+                            @if($item->waktu_selesai)
+                                – {{ substr($item->waktu_selesai, 0, 5) }}
+                            @endif
+                        </td>
 
-    <td>{{ $item->jenis_ibadah }}</td>
-    <td>{{ $item->lokasi }}</td>
-    <td>{{ $item->pelayan ?? '-' }}</td>
+                        <td>
+                            <span style="font-weight:500;">{{ $item->jenis_ibadah }}</span>
+                        </td>
+                        <td>{{ $item->lokasi }}</td>
+                        <td>{{ $item->pelayan ?? '-' }}</td>
 
-    {{-- STATUS --}}
-    <td>
-        @if ($item->tanggal >= now()->toDateString())
-            <span class="badge bg-success">Akan Datang</span>
-        @else
-            <span class="badge bg-secondary">Selesai</span>
-        @endif
-    </td>
+                        {{-- STATUS --}}
+                        <td>
+                            @if ($item->tanggal >= now()->toDateString())
+                                <span class="badge bg-success">Akan Datang</span>
+                            @else
+                                <span class="badge bg-secondary">Selesai</span>
+                            @endif
+                        </td>
 
-    {{-- AKSI --}}
-    {{-- AKSI --}}
-    <td>
-        <a href="{{ route('admin.jadwal.edit', $item->id_jadwal) }}"
-           class="btn btn-sm btn-warning">
-            Edit
-        </a>
+                        {{-- AKSI --}}
+                        <td>
+                            <div class="action-cell">
+                                <a href="{{ route('admin.jadwal.edit', $item->id_jadwal) }}"
+                                   class="btn-edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Edit
+                                </a>
 
-        <form action="{{ route('admin.jadwal.destroy', $item->id_jadwal) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus jadwal ini?');">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-sm btn-danger">
-                Hapus
-            </button>
-        </form>
-    </td>
-</tr>
-@empty
-<tr>
-    <td colspan="8" class="text-center">
-        Belum ada jadwal ibadah
-    </td>
-</tr>
-@endforelse
-</tbody>
-
+                                <form action="{{ route('admin.jadwal.destroy', $item->id_jadwal) }}" method="POST" style="display:inline" onsubmit="return confirm('Yakin ingin menghapus jadwal ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-delete">
+                                        <i class="bi bi-trash3"></i>
+                                        Hapus
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <i class="bi bi-calendar-x"></i>
+                                <p>Belum ada jadwal ibadah</p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
             </table>
-
         </div>
     </div>
 
+</div>
+
 <x-hint-button title="Fungsi Jadwal Ibadah">
-    Mengatur jadwal pelayanan ibadah rutin dan khusus. Pastikan informasi tanggal, waktu, dan lokasi ibadah sudah akurat sebelum dipublikasikan agar jemaat mendapatkan informasi yang benar.
+    Mengatur jadwal pelayanan ibadah rutin maupun khusus.
 </x-hint-button>
 
 @endsection
+
