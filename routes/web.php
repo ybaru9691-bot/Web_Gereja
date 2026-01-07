@@ -15,8 +15,13 @@ use App\Http\Controllers\Admin\JadwalIbadahController;
   use App\Http\Controllers\JadwalController;
   use App\Http\Controllers\ScanController;
 use App\Http\Controllers\Admin\ScanLogController;
+
 use App\Models\ScanLog;
 use Carbon\Carbon;
+
+use App\Http\Controllers\Admin\KeuanganController;
+
+
 
   
 
@@ -216,6 +221,19 @@ Route::get('/analisis', [\App\Http\Controllers\Admin\AnalisisClusterController::
 Route::post('/analisis/hitung', [\App\Http\Controllers\Admin\AnalisisClusterController::class, 'hitung'])
     ->name('admin.analisis.hitung');
 
+
+// ================= KEUANGAN JEMAAT =================
+// ================= KEUANGAN JEMAAT =================
+Route::get('/keuangan', [KeuanganController::class, 'index'])
+    ->name('admin.keuangan.index');
+
+Route::get('/keuangan/create', [KeuanganController::class, 'create'])
+    ->name('admin.keuangan.create');
+
+Route::post('/keuangan', [KeuanganController::class, 'store'])
+    ->name('admin.keuangan.store');
+
+    
 });
 
 
