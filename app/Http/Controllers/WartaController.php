@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Warta;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 
 class WartaController extends Controller

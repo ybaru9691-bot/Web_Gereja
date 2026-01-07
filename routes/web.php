@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\WartaController as AdminWartaController;
 
 use App\Http\Controllers\Pendeta\PengumumanController as PendetaPengumumanController;
 use App\Http\Controllers\Pendeta\AnalisisController as PendetaAnalisisController;
+use App\Http\Controllers\Pendeta\KeuanganController as PendetaKeuanganController;
 use App\Models\Pengumuman;
 use App\Models\Warta;
 
@@ -246,9 +247,8 @@ Route::get('/scan/{id_jadwal}', [ScanController::class, 'scan'])
 | PENDETA
 |--------------------------------------------------------------------------
 */
-Route::get('/pendeta/keuangan', function () {
-    return view('pendeta.keuangan.index');
-})->name('pendeta.keuangan');
+Route::get('/pendeta/keuangan', [PendetaKeuanganController::class, 'index'])
+    ->name('pendeta.keuangan');
 
 
 
