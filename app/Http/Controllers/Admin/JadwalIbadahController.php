@@ -139,4 +139,18 @@ class JadwalIbadahController extends Controller
         return redirect()->route('admin.jadwal.index')
             ->with('success', 'Jadwal ibadah berhasil dihapus');
     }
+
+    /**
+     * Download QR file untuk jadwal (pakai Storage::download)
+     */
+    public function downloadQr($id)
+    {
+        $jadwal = JadwalIbadah::findOrFail($id);
+        if (! $jadwal->qr_code || ! Storage::disk('public')->exists($jadwal->qr_code)) {
+            return redirect()->back()->with('error', 'QR tidak tersedia');
+        }
+
+        $filename = 'QR-Jadwal-' . $jadwal->id_jadwal . '.png';
+        return Storage::disk('public')->download($jadwal->qr_code, $filename);
+    }
 }

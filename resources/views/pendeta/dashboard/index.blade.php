@@ -53,14 +53,14 @@
                 Perbandingan scan kehadiran per hari dalam minggu berjalan
             </p>
 
-            <div class="d-flex gap-2 mb-3">
-                <span class="badge bg-light text-dark">Senin</span>
-                <span class="badge bg-light text-dark">Selasa</span>
-                <span class="badge bg-light text-dark">Rabu</span>
-                <span class="badge bg-light text-dark">Jumat</span>
-                <span class="badge bg-light text-dark">Sabtu</span>
-                <span class="badge bg-primary">Minggu</span>
+            <div class="d-flex gap-2 mb-3" id="dayButtons">
+                @php $days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']; @endphp
+                @foreach($days as $d)
+                    <button type="button" class="btn btn-sm @if($currentDay == $d) btn-primary @else btn-light text-dark @endif" data-day="{{ $d }}">{{ $d }}</button>
+                @endforeach
             </div>
+
+            <small id="dayInfo" class="text-muted small mt-2"></small>
 
             <div style="height: 300px;">
                 <canvas id="jemaatChart"></canvas>
@@ -69,7 +69,7 @@
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
                 const ctx = document.getElementById('jemaatChart').getContext('2d');
-                new Chart(ctx, {
+                const jemaatChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: ['Aktif', 'Sedang', 'Pasif'],
@@ -77,9 +77,9 @@
                             label: 'Jumlah Jemaat',
                             data: @json($chartData),
                             backgroundColor: [
-                                'rgba(40, 167, 69, 0.7)',  // Success/Green for Disiplin
-                                'rgba(255, 193, 7, 0.7)',  // Warning/Yellow for Cukup Disiplin
-                                'rgba(220, 53, 69, 0.7)'   // Danger/Red for Tidak Disiplin
+                                'rgba(40, 167, 69, 0.7)',
+                                'rgba(255, 193, 7, 0.7)',
+                                'rgba(220, 53, 69, 0.7)'
                             ],
                             borderColor: [
                                 'rgb(40, 167, 69)',
@@ -107,6 +107,45 @@
                         }
                     }
                 });
+
+                const scanByDayUrl = '{{ route('admin.dashboard.scanByDay') }}';
+
+                document.querySelectorAll('#dayButtons button').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const day = btn.dataset.day;
+                        document.querySelectorAll('#dayButtons button').forEach(b => {
+                            b.classList.remove('btn-primary');
+                            b.classList.add('btn-light','text-dark');
+                        });
+                        btn.classList.remove('btn-light','text-dark');
+                        btn.classList.add('btn-primary');
+
+                        fetch(scanByDayUrl + '?day=' + encodeURIComponent(day))
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.error) {
+                                    document.getElementById('dayInfo').textContent = data.error;
+                                    jemaatChart.data.datasets[0].data = [0,0,0];
+                                    jemaatChart.update();
+                                    return;
+                                }
+                                if (!data.exists) {
+                                    document.getElementById('dayInfo').textContent = 'Tidak ada jadwal ibadah pada ' + day;
+                                } else {
+                                    document.getElementById('dayInfo').textContent = data.attendees_count + ' orang scan pada ' + data.date;
+                                }
+                                jemaatChart.data.datasets[0].data = [data.clusters.Aktif, data.clusters.Sedang, data.clusters.Pasif];
+                                jemaatChart.update();
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                document.getElementById('dayInfo').textContent = 'Terjadi kesalahan';
+                            });
+                    });
+                });
+
+                const defaultBtn = document.querySelector('#dayButtons button.btn-primary') || document.querySelector('#dayButtons button');
+                if (defaultBtn) defaultBtn.click();
             </script>
         </div>
     </div>
