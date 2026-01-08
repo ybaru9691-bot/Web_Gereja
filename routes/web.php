@@ -145,8 +145,51 @@ Route::get('/admin/dashboard', function () {
         ->whereTime('waktu_scan', '<=', '12:30:00')
         ->count();
 
-    return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount', 'chartData', 'weeklyScanCount', 'pagiCount', 'siangCount'));
+    $dayNames = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+    $currentDay = $dayNames[Carbon::now()->dayOfWeekIso - 1];
+
+    return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount', 'chartData', 'weeklyScanCount', 'pagiCount', 'siangCount', 'currentDay'));
 })->name('admin.dashboard');
+
+Route::get('/admin/dashboard/scan-by-day', function (Illuminate\Http\Request $request) {
+    $day = $request->query('day');
+    $dayNames = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+    if (!in_array($day, $dayNames)) {
+        return response()->json(['error' => 'Invalid day'], 400);
+    }
+
+    $index = array_search($day, $dayNames); // 0..6 (Senin..Minggu)
+    $date = Carbon::now()->startOfWeek()->addDays($index)->toDateString();
+
+    $jadwalExists = \App\Models\JadwalIbadah::whereDate('tanggal', $date)->exists();
+
+    $attendees = \App\Models\ScanLog::whereDate('waktu_scan', $date)->distinct('guest_uuid')->pluck('guest_uuid')->toArray();
+    $attendeesCount = count($attendees);
+
+    $latestPeriode = \App\Models\AnalisisCluster::max('periode');
+    $clusters = [];
+    if (!empty($attendees) && $latestPeriode) {
+        $clusters = \App\Models\AnalisisCluster::whereIn('guest_uuid', $attendees)
+            ->where('periode', $latestPeriode)
+            ->select('cluster_label', DB::raw('count(*) as total'))
+            ->groupBy('cluster_label')
+            ->pluck('total','cluster_label')
+            ->toArray();
+    }
+
+    $labels = ['Aktif','Sedang','Pasif'];
+    $clusterCounts = [];
+    foreach ($labels as $label) {
+        $clusterCounts[$label] = $clusters[$label] ?? 0;
+    }
+
+    return response()->json([
+        'date' => $date,
+        'exists' => $jadwalExists,
+        'attendees_count' => $attendeesCount,
+        'clusters' => $clusterCounts
+    ]);
+})->name('admin.dashboard.scanByDay');
 
 Route::get('/pendeta/dashboard', function () {
     $wartaCount = \App\Models\Warta::count();
