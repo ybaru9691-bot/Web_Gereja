@@ -102,7 +102,7 @@
         <div class="row text-center">
             <div class="col-md-4 mb-4">
                 <div class="tentang-card h-100">
-                    <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=400" 
+                    <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=400" 
                          alt="Ibadah Mingguan" 
                          class="img-fluid rounded mb-3"
                          style="height: 200px; object-fit: cover; width: 100%;">
@@ -115,7 +115,7 @@
 
             <div class="col-md-4 mb-4">
                 <div class="tentang-card h-100">
-                    <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=400" 
+                    <img src="{{ asset('images/renabeth.png') }}" 
                          alt="Pelayanan Pemuda" 
                          class="img-fluid rounded mb-3"
                          style="height: 200px; object-fit: cover; width: 100%;">
@@ -164,7 +164,7 @@
                      style="height: 200px; object-fit: cover; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="{{ asset('images/galeri4beth.jpg') }}" 
+                <img src="{{ asset('images/galeribethania2.jpg') }}" 
                      alt="Persekutuan" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; object-fit: cover; width: 100%;">
@@ -176,7 +176,7 @@
                      style="height: 200px; width: 100%;">
             </div>
             <div class="col-md-4 col-6">
-                <img src="{{ asset('images/galeribethania6.jpeg') }}" 
+                <img src="{{ asset('images/galeribethania1.jpg') }}" 
                      alt="Komunitas" 
                      class="img-fluid rounded shadow-sm"
                      style="height: 200px; object-fit: cover; width: 100%;">

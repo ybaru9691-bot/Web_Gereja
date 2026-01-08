@@ -18,12 +18,15 @@ class ScanController extends Controller
         // 2️⃣ Waktu sekarang
         $now = Carbon::now('Asia/Jakarta');
 
-        // 3️⃣ Waktu mulai ibadah
+        // 3️⃣ Waktu mulai ibadah (Ganti titik ke titik dua agar Carbon bisa parse dengan benar)
+        $cleanTime = str_replace('.', ':', $jadwal->waktu_mulai);
         $waktuMulai = Carbon::parse(
-            $jadwal->tanggal . ' ' . $jadwal->waktu_mulai
+            $jadwal->tanggal . ' ' . $cleanTime,
+            'Asia/Jakarta'
         );
 
         // 4️⃣ Tentukan status kehadiran
+        $selisih = 0;
         if ($now->lessThanOrEqualTo($waktuMulai)) {
             $kehadiran = 'tepat';
         } else {
@@ -68,7 +71,8 @@ class ScanController extends Controller
             'jadwal_id'        => $jadwal->id_jadwal,
             'warta_id'         => $jadwal->warta_id ?? 1,
             'waktu_scan'       => $now,
-            'status_kehadiran' => $kehadiran
+            'status_kehadiran' => $kehadiran,
+            'selisih_menit'    => $selisih
         ]);
 
         // 8️⃣ Tampilkan hasil

@@ -121,7 +121,7 @@ Route::get('/admin/dashboard', function () {
         ->pluck('total', 'cluster_label')
         ->toArray();
 
-    $labels = ['Disiplin', 'Cukup Disiplin', 'Tidak Disiplin'];
+    $labels = ['Aktif', 'Sedang', 'Pasif'];
     $chartData = [];
     foreach ($labels as $label) {
         $chartData[] = $clusters[$label] ?? 0;
@@ -132,7 +132,20 @@ Route::get('/admin/dashboard', function () {
         Carbon::now()->endOfWeek()
     ])->count();
 
-    return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount', 'chartData', 'weeklyScanCount'));
+    $today = Carbon::today();
+    $targetSunday = $today->isSunday() ? $today : $today->copy()->previous(Carbon::SUNDAY);
+
+    $pagiCount = ScanLog::whereDate('waktu_scan', $targetSunday)
+        ->whereTime('waktu_scan', '>=', '08:00:00')
+        ->whereTime('waktu_scan', '<=', '10:00:00')
+        ->count();
+
+    $siangCount = ScanLog::whereDate('waktu_scan', $targetSunday)
+        ->whereTime('waktu_scan', '>=', '10:30:00')
+        ->whereTime('waktu_scan', '<=', '12:30:00')
+        ->count();
+
+    return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount', 'chartData', 'weeklyScanCount', 'pagiCount', 'siangCount'));
 })->name('admin.dashboard');
 
 Route::get('/pendeta/dashboard', function () {
@@ -146,7 +159,7 @@ Route::get('/pendeta/dashboard', function () {
         ->pluck('total', 'cluster_label')
         ->toArray();
 
-    $labels = ['Disiplin', 'Cukup Disiplin', 'Tidak Disiplin'];
+    $labels = ['Aktif', 'Sedang', 'Pasif'];
     $chartData = [];
     foreach ($labels as $label) {
         $chartData[] = $clusters[$label] ?? 0;
@@ -157,7 +170,20 @@ Route::get('/pendeta/dashboard', function () {
         Carbon::now()->endOfWeek()
     ])->count();
 
-    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount', 'jemaatCount', 'chartData', 'weeklyScanCount'));
+    $today = Carbon::today();
+    $targetSunday = $today->isSunday() ? $today : $today->copy()->previous(Carbon::SUNDAY);
+
+    $pagiCount = ScanLog::whereDate('waktu_scan', $targetSunday)
+        ->whereTime('waktu_scan', '>=', '08:00:00')
+        ->whereTime('waktu_scan', '<=', '10:00:00')
+        ->count();
+
+    $siangCount = ScanLog::whereDate('waktu_scan', $targetSunday)
+        ->whereTime('waktu_scan', '>=', '10:30:00')
+        ->whereTime('waktu_scan', '<=', '12:30:00')
+        ->count();
+
+    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount', 'jemaatCount', 'chartData', 'weeklyScanCount', 'pagiCount', 'siangCount'));
 })->name('pendeta.dashboard');
 
 /*
@@ -262,4 +288,5 @@ Route::prefix('pendeta')->group(function () {
     Route::put('/pengumuman/{id}', [PendetaPengumumanController::class, 'update']);
     Route::delete('/pengumuman/{id}', [PendetaPengumumanController::class, 'destroy']);
     Route::get('/analisis', [PendetaAnalisisController::class, 'index'])->name('pendeta.analisis');
+    Route::post('/analisis/hitung', [PendetaAnalisisController::class, 'hitung'])->name('pendeta.analisis.hitung');
 });

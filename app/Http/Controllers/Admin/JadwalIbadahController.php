@@ -11,7 +11,7 @@ class JadwalIbadahController extends Controller
 {
     public function index()
     {
-        $jadwal = JadwalIbadah::orderBy('tanggal')->get();
+        $jadwal = JadwalIbadah::latest()->get();
         return view('admin.jadwal-ibadah.index', compact('jadwal'));
     }
 

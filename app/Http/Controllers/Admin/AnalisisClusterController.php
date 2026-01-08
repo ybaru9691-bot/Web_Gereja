@@ -37,11 +37,11 @@ class AnalisisClusterController extends Controller
         foreach ($logs as $log) {
 
             if ($log->score_r == 0) {
-                $cluster = 'Disiplin';
+                $cluster = 'Aktif';
             } elseif ($log->score_d <= 30) {
-                $cluster = 'Cukup Disiplin';
+                $cluster = 'Sedang';
             } else {
-                $cluster = 'Tidak Disiplin';
+                $cluster = 'Pasif';
             }
 
             AnalisisCluster::updateOrCreate(

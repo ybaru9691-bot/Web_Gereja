@@ -71,6 +71,13 @@
 </div>
 
 <style>
+.login-card {
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("{{ asset('images/renabeth1.png') }}") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
 .password-wrapper {
     position: relative;
 }

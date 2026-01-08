@@ -56,14 +56,14 @@
                     <td class="score-cell score-d">{{ $row->score_d }}</td>
                     <td>
                         <span class="cluster-badge 
-                            @if($row->cluster_label == 'Disiplin') cluster-disiplin
-                            @elseif($row->cluster_label == 'Cukup Disiplin') cluster-cukup
+                            @if($row->cluster_label == 'Aktif') cluster-disiplin
+                            @elseif($row->cluster_label == 'Sedang') cluster-cukup
                             @else cluster-kurang
                             @endif
                         ">
-                            @if($row->cluster_label == 'Disiplin')
+                            @if($row->cluster_label == 'Aktif')
                                 <i class="bi bi-check-circle-fill"></i>
-                            @elseif($row->cluster_label == 'Cukup Disiplin')
+                            @elseif($row->cluster_label == 'Sedang')
                                 <i class="bi bi-dash-circle-fill"></i>
                             @else
                                 <i class="bi bi-x-circle-fill"></i>
@@ -92,5 +92,9 @@
     </div>
 
 </div>
+
+<x-hint-button title="Fungsi Analisis Jemaat">
+    Menganalisis tingkat keaktifan jemaat berdasarkan frekuensi kehadiran (F), kedekatan waktu (R), dan durasi (D).
+</x-hint-button>
 @endsection
 

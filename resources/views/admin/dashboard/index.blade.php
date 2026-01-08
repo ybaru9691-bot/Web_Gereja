@@ -72,7 +72,7 @@
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Disiplin', 'Cukup Disiplin', 'Tidak Disiplin'],
+                        labels: ['Aktif', 'Sedang', 'Pasif'],
                         datasets: [{
                             label: 'Jumlah Jemaat',
                             data: @json($chartData),
@@ -119,20 +119,14 @@
             <ul class="list-unstyled">
                 <li class="mb-3 border-bottom pb-2">
                     <strong>Ibadah Minggu Pagi</strong><br>
-                    <small class="text-muted">07.00 - 09.00</small>
-                    <span class="float-end badge bg-light text-dark">82 scan</span>
+                    <small class="text-muted">08.00 - 10.00</small>
+                    <span class="float-end badge bg-light text-dark">{{ $pagiCount ?? 0 }} scan</span>
                 </li>
 
                 <li class="mb-3 border-bottom pb-2">
                     <strong>Ibadah Minggu Siang</strong><br>
-                    <small class="text-muted">10.00 - 12.00</small>
-                    <span class="float-end badge bg-light text-dark">43 scan</span>
-                </li>
-
-                <li class="mb-3">
-                    <strong>Ibadah Pemuda</strong><br>
-                    <small class="text-muted">Sabtu 17.00</small>
-                    <span class="float-end badge bg-light text-dark">12 scan</span>
+                    <small class="text-muted">10.30 - 12.30</small>
+                    <span class="float-end badge bg-light text-dark">{{ $siangCount ?? 0 }} scan</span>
                 </li>
             </ul>
 

@@ -4,10 +4,27 @@
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="fw-bold m-0">Analisis Pelayanan & Jemaat</h3>
-        <button class="btn btn-primary btn-sm">
-            <i class="bi bi-arrow-clockwise"></i> Perbarui Analisis
-        </button>
+        <form action="{{ route('pendeta.analisis.hitung') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="bi bi-arrow-clockwise"></i> Perbarui Analisis
+            </button>
+        </form>
     </div>
+
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if(session('info'))
+    <div class="alert alert-info alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i> {{ session('info') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
 
     {{-- HIGHLIGHT CARDS --}}
     <div class="row g-3 mb-4">
@@ -60,16 +77,61 @@
                     <h5 class="fw-bold mb-3">Distribusi Klaster Jemaat</h5>
                     <p class="text-muted small mb-4">Analisis berdasarkan keaktifan dan partisipasi ibadah menggunakan algoritma K-Means.</p>
                     
-                    <div class="bg-light rounded d-flex flex-column align-items-center justify-content-center" style="height: 300px;">
-                        <i class="bi bi-pie-chart-fill text-muted display-1 mb-3"></i>
-                        <p class="text-muted">Visualisasi Grafik (Chart.js) akan muncul di sini</p>
+                    <div style="height: 300px;">
+                        <canvas id="jemaatChart"></canvas>
                     </div>
 
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                        const ctx = document.getElementById('jemaatChart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Aktif', 'Sedang', 'Pasif'],
+                                datasets: [{
+                                    label: 'Jumlah Jemaat',
+                                    data: @json($chartData),
+                                    backgroundColor: [
+                                        'rgba(40, 167, 69, 0.7)',  // Success/Green for Aktif
+                                        'rgba(255, 193, 7, 0.7)',  // Warning/Yellow for Sedang
+                                        'rgba(220, 53, 69, 0.7)'   // Danger/Red for Pasif
+                                    ],
+                                    borderColor: [
+                                        'rgb(40, 167, 69)',
+                                        'rgb(255, 193, 7)',
+                                        'rgb(220, 53, 69)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+
                     <div class="mt-4 row text-center">
-                        @foreach($clusters as $label => $val)
+                        @foreach(['Aktif', 'Sedang', 'Pasif'] as $label)
                         <div class="col-4">
-                            <h6 class="mb-1 fw-bold">{{ $label }}</h6>
-                            <span class="badge bg-{{ $loop->index == 0 ? 'primary' : ($loop->index == 1 ? 'success' : 'info') }}">{{ $val }}%</span>
+                            <h6 class="mb-1 fw-bold small text-uppercase text-muted">{{ $label }}</h6>
+                            <h4 class="fw-bold mb-0 text-{{ $label == 'Aktif' ? 'success' : ($label == 'Sedang' ? 'warning' : 'danger') }}">
+                                {{ $clusters[$label] ?? 0 }}
+                            </h4>
+                            <small class="text-muted">Jemaat</small>
                         </div>
                         @endforeach
                     </div>

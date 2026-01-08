@@ -15,7 +15,8 @@ class ScanLog extends Model
         'jadwal_id',
         'warta_id',
         'waktu_scan',
-        'status_kehadiran'
+        'status_kehadiran',
+        'selisih_menit'
     ];
 
     public function jadwal()

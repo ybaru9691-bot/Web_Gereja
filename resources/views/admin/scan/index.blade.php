@@ -39,10 +39,14 @@
                         <td>{{ $log->jadwal->tanggal ?? '-' }}</td>
                         <td>{{ \Carbon\Carbon::parse($log->waktu_scan)->format('H:i:s') }}</td>
                         <td>
-                            @if ($log->status_kehadiran === 'hadir')
-                                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">Hadir</span>
+                            @if ($log->status_kehadiran === 'tepat')
+                                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">Tepat Waktu</span>
+                            @elseif ($log->status_kehadiran === 'terlambat')
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">Terlambat</span>
+                            @elseif ($log->status_kehadiran === 'terlambat_berat')
+                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">Terlambat Berat</span>
                             @else
-                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">Terlambat</span>
+                                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-3 py-2">{{ ucfirst($log->status_kehadiran ?? '-') }}</span>
                             @endif
                         </td>
                     </tr>
