@@ -33,10 +33,25 @@
                         </td>
                         <td>
                             <span style="font-weight:500;">
-                                {{ $log->jadwal->jenis_ibadah ?? '-' }}
+                                {{-- Tampilkan dari relasi jadwal, jika tidak ada tetap '-' --}}
+                                @if($log->jadwal && $log->jadwal->jenis_ibadah)
+                                    {{ $log->jadwal->jenis_ibadah }}
+                                    @if(!empty($log->jadwal->inferred))
+                                        <small class="text-muted">(inferred)</small>
+                                    @endif
+                                @else
+                                    -
+                                @endif
                             </span>
                         </td>
-                        <td>{{ $log->jadwal->tanggal ?? '-' }}</td>
+                        <td>
+                            {{-- Jika tidak ada jadwal terkait, tampilkan tanggal dari waktu_scan sebagai fallback --}}
+                            @if($log->jadwal && $log->jadwal->tanggal)
+                                {{ $log->jadwal->tanggal }}
+                            @else
+                                {{ \Carbon\Carbon::parse($log->waktu_scan)->toDateString() }}
+                            @endif
+                        </td>
                         <td>{{ \Carbon\Carbon::parse($log->waktu_scan)->format('H:i:s') }}</td>
                         <td>
                             @if ($log->status_kehadiran === 'tepat')
