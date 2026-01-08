@@ -75,12 +75,15 @@
                 @if($jadwal->qr_code)
                 <div class="mb-3">
                     <label class="form-label">QR Jadwal Ibadah</label>
-                    <div>
-                        <img src="{{ asset('storage/' . $jadwal->qr_code) }}" alt="QR Jadwal" style="width:120px;height:120px;">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="{{ asset('storage/' . $jadwal->qr_code) }}" alt="QR Jadwal" style="width:120px;height:120px;object-fit:contain;border-radius:6px;">
+                        <div>
+                            <a href="{{ route('admin.jadwal.downloadQr', $jadwal->id_jadwal) }}" class="btn btn-primary">
+                                <i class="bi bi-download"></i>
+                                <span class="ms-1">Download QR</span>
+                            </a>
+                        </div>
                     </div>
-                    <a href="{{ asset('storage/' . $jadwal->qr_code) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
-                        <i class="bi bi-download"></i> Download QR
-                    </a>
                 </div>
                 @endif
 

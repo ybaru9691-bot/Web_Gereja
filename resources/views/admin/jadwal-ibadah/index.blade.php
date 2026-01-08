@@ -16,11 +16,18 @@
         </a>
     </div>
 
-    {{-- ALERT SUCCESS --}}
+    {{-- ALERT SUCCESS / ERROR --}}
     @if (session('success'))
         <div class="alert-modern">
             <i class="bi bi-check-circle-fill"></i>
             {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert-modern alert-error">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            {{ session('error') }}
         </div>
     @endif
 
@@ -73,11 +80,14 @@
                         {{-- QR --}}
                         <td>
                             @if($item->qr_code)
-                                <img src="{{ asset('storage/' . $item->qr_code) }}" alt="QR Jadwal" style="width:70px;height:70px;">
-                                <br>
-                                <a href="{{ asset('storage/' . $item->qr_code) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-1">
-                                    <i class="bi bi-download"></i> Download
-                                </a>
+                                <div class="d-flex flex-column align-items-center" style="gap:6px;">
+                                    <img src="{{ asset('storage/' . $item->qr_code) }}" alt="QR Jadwal" style="width:86px;height:86px;object-fit:contain;border-radius:6px;">
+
+                                    <a href="{{ route('admin.jadwal.downloadQr', $item->id_jadwal) }}" class="btn btn-sm btn-primary" title="Download QR">
+                                        <i class="bi bi-download"></i>
+                                        <span class="ms-1">Download</span>
+                                    </a>
+                                </div>
                             @else
                                 <span class="text-muted">Belum ada QR</span>
                             @endif

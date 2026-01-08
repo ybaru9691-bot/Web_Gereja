@@ -226,7 +226,10 @@ Route::get('/pendeta/dashboard', function () {
         ->whereTime('waktu_scan', '<=', '12:30:00')
         ->count();
 
-    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount', 'jemaatCount', 'chartData', 'weeklyScanCount', 'pagiCount', 'siangCount'));
+    $dayNames = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+    $currentDay = $dayNames[Carbon::now()->dayOfWeekIso - 1];
+
+    return view('pendeta.dashboard.index', compact('wartaCount', 'pengumumanCount', 'jemaatCount', 'chartData', 'weeklyScanCount', 'pagiCount', 'siangCount', 'currentDay'));
 })->name('pendeta.dashboard');
 
 /*
@@ -279,6 +282,10 @@ Route::put('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'update'])
 // 🗑 DELETE
 Route::delete('/jadwal-ibadah/{id}', [JadwalIbadahController::class, 'destroy'])
     ->name('admin.jadwal.destroy');
+
+// 🔽 DOWNLOAD QR
+Route::get('/jadwal-ibadah/{id}/download-qr', [JadwalIbadahController::class, 'downloadQr'])
+    ->name('admin.jadwal.downloadQr');
 
 // ================= SCAN LOG =================
 Route::get('/scan', [ScanLogController::class, 'index'])
