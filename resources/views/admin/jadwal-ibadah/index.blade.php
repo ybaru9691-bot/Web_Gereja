@@ -70,10 +70,20 @@
 
                         {{-- STATUS --}}
                         <td>
-                            @if ($item->tanggal >= now()->toDateString())
+                            @php
+                                $now = \Carbon\Carbon::now();
+                                $start = \Carbon\Carbon::parse($item->tanggal . ' ' . $item->waktu_mulai);
+                                $end = $item->waktu_selesai 
+                                    ? \Carbon\Carbon::parse($item->tanggal . ' ' . $item->waktu_selesai)
+                                    : $start->copy()->addHours(2);
+                            @endphp
+
+                            @if ($now->lt($start))
                                 <span class="badge bg-success">Akan Datang</span>
-                            @else
+                            @elseif ($now->gt($end))
                                 <span class="badge bg-secondary">Selesai</span>
+                            @else
+                                <span class="badge bg-warning">Sedang Berlangsung</span>
                             @endif
                         </td>
 
