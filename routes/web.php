@@ -289,4 +289,6 @@ Route::prefix('pendeta')->group(function () {
     Route::delete('/pengumuman/{id}', [PendetaPengumumanController::class, 'destroy']);
     Route::get('/analisis', [PendetaAnalisisController::class, 'index'])->name('pendeta.analisis');
     Route::post('/analisis/hitung', [PendetaAnalisisController::class, 'hitung'])->name('pendeta.analisis.hitung');
+    Route::get('/analisis/detail', [PendetaAnalisisController::class, 'detail'])->name('pendeta.analisis.detail');
+    Route::get('/analisis/download', [PendetaAnalisisController::class, 'downloadPdf'])->name('pendeta.analisis.download');
 });

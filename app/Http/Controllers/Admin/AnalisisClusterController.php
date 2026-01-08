@@ -13,7 +13,36 @@ class AnalisisClusterController extends Controller
     public function index()
     {
         $data = AnalisisCluster::orderBy('periode', 'desc')->get();
-        return view('admin.analisis.index', compact('data'));
+
+        // --- TREN 6 BULAN TERAKHIR ---
+        $trendPeriods = AnalisisCluster::select('periode')
+            ->groupBy('periode')
+            ->orderBy('periode', 'desc')
+            ->limit(6)
+            ->pluck('periode')
+            ->sort();
+
+        $trendChart = [
+            'labels' => [],
+            'Aktif' => [],
+            'Sedang' => [],
+            'Pasif' => []
+        ];
+
+        foreach ($trendPeriods as $tp) {
+            $trendChart['labels'][] = Carbon::parse($tp . '-01')->format('M Y');
+            
+            $counts = AnalisisCluster::where('periode', $tp)
+                ->select('cluster_label', DB::raw('count(*) as total'))
+                ->groupBy('cluster_label')
+                ->pluck('total', 'cluster_label');
+            
+            $trendChart['Aktif'][] = $counts['Aktif'] ?? 0;
+            $trendChart['Sedang'][] = $counts['Sedang'] ?? 0;
+            $trendChart['Pasif'][] = $counts['Pasif'] ?? 0;
+        }
+
+        return view('admin.analisis.index', compact('data', 'trendChart'));
     }
 
     public function hitung()
@@ -36,9 +65,9 @@ class AnalisisClusterController extends Controller
 
         foreach ($logs as $log) {
 
-            if ($log->score_r == 0) {
+            if ($log->score_f >= 3 && $log->score_r == 0) {
                 $cluster = 'Aktif';
-            } elseif ($log->score_d <= 30) {
+            } elseif ($log->score_f >= 2 && $log->score_d <= 30) {
                 $cluster = 'Sedang';
             } else {
                 $cluster = 'Pasif';

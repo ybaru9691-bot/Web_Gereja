@@ -149,8 +149,13 @@
                         <div class="d-flex gap-3">
                             <div class="text-warning"><i class="bi bi-lightbulb-fill fs-5"></i></div>
                             <div>
-                                <h6 class="fw-bold mb-1">Keaktifan Meningkat</h6>
-                                <p class="text-muted small mb-0">Partisipasi jemaat pada ibadah pagi meningkat 12% dalam sebulan terakhir.</p>
+                                <h6 class="fw-bold mb-1">Keaktifan Jemaat</h6>
+                                <p class="text-muted small mb-0">Tren keaktifan jemaat di klaster Aktif 
+                                    <span class="fw-bold text-{{ $insights['growth'] >= 0 ? 'success' : 'danger' }}">
+                                        {{ $insights['growth'] >= 0 ? 'meningkat' : 'menurun' }} {{ abs($insights['growth']) }}%
+                                    </span> 
+                                    dibandingkan bulan lalu.
+                                </p>
                             </div>
                         </div>
 
@@ -158,15 +163,15 @@
                             <div class="text-primary"><i class="bi bi-info-circle-fill fs-5"></i></div>
                             <div>
                                 <h6 class="fw-bold mb-1">Rekomendasi Warta</h6>
-                                <p class="text-muted small mb-0">Topik warta seputar pemberdayaan pemuda memiliki minat baca tertinggi.</p>
+                                <p class="text-muted small mb-0">Topik warta terbaru: <span class="fw-bold">"{{ $insights['top_warta'] }}"</span> memiliki potensi minat baca tinggi.</p>
                             </div>
                         </div>
 
                         <div class="d-flex gap-3">
                             <div class="text-success"><i class="bi bi-check-circle-fill fs-5"></i></div>
                             <div>
-                                <h6 class="fw-bold mb-1">Target Tercapai</h6>
-                                <p class="text-muted small mb-0">Distribusi pengumuman digital telah menjangkau 85% jemaat terdaftar.</p>
+                                <h6 class="fw-bold mb-1">Target Jangkauan</h6>
+                                <p class="text-muted small mb-0">Sistem mendeteksi <span class="fw-bold">{{ $insights['reach'] }}%</span> jemaat terdaftar telah teranalisis di periode {{ $latestPeriode }}.</p>
                             </div>
                         </div>
                     </div>
@@ -174,10 +179,76 @@
                     <div class="mt-5 border-top pt-4">
                         <h6 class="fw-bold mb-3 small text-uppercase text-muted">Aksi Cepat</h6>
                         <div class="d-grid gap-2">
-                            <a href="#" class="btn btn-outline-primary btn-sm">Unduh Laporan PDF</a>
-                            <a href="#" class="btn btn-outline-secondary btn-sm">Detail Data Mentah</a>
+                            <a href="{{ route('pendeta.analisis.download') }}" class="btn btn-outline-primary btn-sm">Unduh Laporan PDF</a>
+                            <a href="{{ route('pendeta.analisis.detail') }}" class="btn btn-outline-secondary btn-sm">Detail Data Mentah</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    <div class="row g-4 mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">Tren Keaktifan Jemaat (6 Periode Terakhir)</h5>
+                    <p class="text-muted small mb-4">Grafik ini menunjukkan perkembangan jumlah jemaat di setiap kategori klaster dari bulan ke bulan.</p>
+                    
+                    <div style="height: 350px;">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+
+                    <script>
+                        const trendCtx = document.getElementById('trendChart').getContext('2d');
+                        new Chart(trendCtx, {
+                            type: 'line',
+                            data: {
+                                labels: @json($trendChart['labels']),
+                                datasets: [
+                                    {
+                                        label: 'Aktif',
+                                        data: @json($trendChart['Aktif']),
+                                        borderColor: 'rgb(40, 167, 69)',
+                                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                                        fill: true,
+                                        tension: 0.4
+                                    },
+                                    {
+                                        label: 'Sedang',
+                                        data: @json($trendChart['Sedang']),
+                                        borderColor: 'rgb(255, 193, 7)',
+                                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                                        fill: true,
+                                        tension: 0.4
+                                    },
+                                    {
+                                        label: 'Pasif',
+                                        data: @json($trendChart['Pasif']),
+                                        borderColor: 'rgb(220, 53, 69)',
+                                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                                        fill: true,
+                                        tension: 0.4
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'bottom'
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
