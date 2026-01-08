@@ -264,8 +264,8 @@ Route::post('/keuangan', [KeuanganController::class, 'store'])
 });
 
 
-Route::get('/scan/{id_jadwal}', [ScanController::class, 'scan'])
-    ->name('scan.jemaat');
+Route::get('/scan/{uuid_jadwal}', [ScanController::class, 'scan'])
+    ->name('scan.jadwal');
 
 
 /*

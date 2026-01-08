@@ -71,6 +71,19 @@
                     <textarea name="keterangan" rows="3" class="form-control">{{ old('keterangan', $jadwal->keterangan) }}</textarea>
                 </div>
 
+                {{-- PREVIEW QR --}}
+                @if($jadwal->qr_code)
+                <div class="mb-3">
+                    <label class="form-label">QR Jadwal Ibadah</label>
+                    <div>
+                        <img src="{{ asset('storage/' . $jadwal->qr_code) }}" alt="QR Jadwal" style="width:120px;height:120px;">
+                    </div>
+                    <a href="{{ asset('storage/' . $jadwal->qr_code) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
+                        <i class="bi bi-download"></i> Download QR
+                    </a>
+                </div>
+                @endif
+
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('admin.jadwal.index') }}" class="btn btn-secondary">
                         Kembali
