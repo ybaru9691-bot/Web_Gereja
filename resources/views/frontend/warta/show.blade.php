@@ -72,11 +72,6 @@
     {{-- ACTION --}}
     <div class="warta-action">
 
-        {{-- DOWNLOAD PDF --}}
-        <a href="{{ route('warta.download', ['id' => $warta->warta_id]) }}"
-           class="btn-download">
-             📄 Download Warta (PDF)
-        </a>
 
         {{-- QR CODE --}}
         @if($warta->qr_code)
