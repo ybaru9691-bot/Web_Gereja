@@ -36,7 +36,8 @@
                         <th><i class="bi bi-geo-alt"></i> Lokasi</th>
                         <th>Pelayan</th>
                         <th>Status</th>
-                        <th style="width:180px">Aksi</th>
+                        <th>QR</th> {{-- Tambah kolom QR --}}
+                        <th style="width:220px">Aksi</th>
                     </tr>
                 </thead>
 
@@ -69,6 +70,19 @@
                             @endif
                         </td>
 
+                        {{-- QR --}}
+                        <td>
+                            @if($item->qr_code)
+                                <img src="{{ asset('storage/' . $item->qr_code) }}" alt="QR Jadwal" style="width:70px;height:70px;">
+                                <br>
+                                <a href="{{ asset('storage/' . $item->qr_code) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-1">
+                                    <i class="bi bi-download"></i> Download
+                                </a>
+                            @else
+                                <span class="text-muted">Belum ada QR</span>
+                            @endif
+                        </td>
+
                         {{-- AKSI --}}
                         <td>
                             <div class="action-cell">
@@ -91,7 +105,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8">
+                        <td colspan="9">
                             <div class="empty-state">
                                 <i class="bi bi-calendar-x"></i>
                                 <p>Belum ada jadwal ibadah</p>
@@ -107,8 +121,7 @@
 </div>
 
 <x-hint-button title="Fungsi Jadwal Ibadah">
-    Mengatur jadwal pelayanan ibadah rutin maupun khusus.
+    Mengatur jadwal pelayanan ibadah rutin maupun khusus, serta menampilkan QR unik untuk absensi jemaat.
 </x-hint-button>
 
 @endsection
-

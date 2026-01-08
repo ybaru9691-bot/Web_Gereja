@@ -26,15 +26,21 @@
 
                 <div class="row">
                     {{-- TANGGAL --}}
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label class="form-label">Tanggal Ibadah</label>
                         <input type="text" id="tanggal" name="tanggal" class="form-control" placeholder="Pilih Tanggal" required>
                     </div>
 
-                    {{-- WAKTU --}}
-                    <div class="col-md-6 mb-3">
+                    {{-- WAKTU MULAI --}}
+                    <div class="col-md-4 mb-3">
                         <label class="form-label">Waktu Mulai</label>
                         <input type="text" id="waktu_mulai" name="waktu_mulai" class="form-control" placeholder="Pilih Waktu" required>
+                    </div>
+
+                    {{-- WAKTU SELESAI --}}
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Waktu Selesai (Opsional)</label>
+                        <input type="text" id="waktu_selesai" name="waktu_selesai" class="form-control" placeholder="Pilih Waktu Selesai">
                     </div>
                 </div>
 
@@ -76,6 +82,14 @@
 
             </form>
 
+            {{-- ⚡ PREVIEW QR (opsional, muncul setelah disimpan) --}}
+            @if(session('qr_preview'))
+                <div class="mt-4 text-center">
+                    <h5>QR Jadwal Ibadah</h5>
+                    <img src="{{ session('qr_preview') }}" alt="QR Jadwal" style="max-width:200px;">
+                </div>
+            @endif
+
         </div>
     </div>
 
@@ -88,11 +102,21 @@
         flatpickr("#tanggal", {
             dateFormat: "Y-m-d",
             altInput: true,
-            altFormat: "d/m/y",
+            altFormat: "d/m/Y",
             allowInput: true
         });
 
         flatpickr("#waktu_mulai", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i:S",
+            time_24hr: true,
+            altInput: true,
+            altFormat: "H.i/00",
+            allowInput: true
+        });
+
+        flatpickr("#waktu_selesai", {
             enableTime: true,
             noCalendar: true,
             dateFormat: "H:i:S",

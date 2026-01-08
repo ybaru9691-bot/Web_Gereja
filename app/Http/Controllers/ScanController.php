@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Cookie;
 
 class ScanController extends Controller
 {
-    public function scan($id_jadwal)
+    public function scan($uuid_jadwal)
     {
         // 1️⃣ Ambil jadwal ibadah
-        $jadwal = JadwalIbadah::where('id_jadwal', $id_jadwal)->firstOrFail();
+        $jadwal = JadwalIbadah::where('uuid_jadwal', $uuid_jadwal)->firstOrFail();
 
         // 2️⃣ Waktu sekarang
         $now = Carbon::now('Asia/Jakarta');
