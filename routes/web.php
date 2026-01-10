@@ -37,7 +37,15 @@ use App\Http\Controllers\Admin\KeuanganController;
 */
 
 Route::get('/', function () {
-    return view('frontend.home');
+    $wartas = \App\Models\Warta::where('status', 'published')->latest()->get();
+    $jadwal = \App\Models\JadwalIbadah::where('status', 'aktif')
+                ->orderBy('tanggal')
+                ->orderBy('waktu_mulai')
+                ->get();
+    $pengumuman = \App\Models\Pengumuman::latest('created_at')->get();
+    $highlight = $pengumuman->first();
+
+    return view('frontend.home', compact('wartas', 'jadwal', 'pengumuman', 'highlight'));
 })->name('home');
 
 /* ================= LOGIN ================= */

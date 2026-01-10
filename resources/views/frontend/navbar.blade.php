@@ -12,19 +12,19 @@
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link {{ request()->routeIs('home') && !request()->has('anchor') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('warta.*') ? 'active' : '' }}" href="{{ route('warta.index') }}">Warta Jemaat</a>
+                    <a class="nav-link" href="{{ route('home') }}#warta">Warta Jemaat</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('jadwal') ? 'active' : '' }}" href="{{ route('jadwal') }}">Jadwal Ibadah</a>
+                    <a class="nav-link" href="{{ route('home') }}#jadwal">Jadwal Ibadah</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('pengumuman') ? 'active' : '' }}" href="{{ route('pengumuman') }}">Pengumuman</a>
+                    <a class="nav-link" href="{{ route('home') }}#pengumuman">Pengumuman</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('tentang') ? 'active' : '' }}" href="{{ route('tentang') }}">Tentang Gereja</a>
+                    <a class="nav-link" href="{{ route('home') }}#tentang">Tentang Gereja</a>
                 </li>
             </ul>
 
@@ -201,13 +201,111 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Tutup menu saat link diklik (untuk mobile)
         const navLinks = navbarMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth < 992) {
-                    navbarMenu.classList.remove('show');
-                    toggler.setAttribute('aria-expanded', 'false');
+
+        // Manual smooth scroll function
+        function smoothScroll(targetId, duration) {
+            const target = document.getElementById(targetId);
+            if (!target) return;
+
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80; // offset for navbar
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const run = ease(timeElapsed, startPosition, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+
+            // Quadratic easing in/out
+            function ease(t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            }
+
+            requestAnimationFrame(animation);
+        }
+
+        // Global Smooth Scroll for all anchor links
+        document.querySelectorAll('a[href^="#"], a[href*="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
+
+                const urlParts = href.split('#');
+                const targetId = urlParts[1];
+                if (!targetId) return;
+
+                const currentPath = window.location.pathname.replace(/\/$/, '');
+                const targetPath = urlParts[0].replace(window.location.origin, '').replace(/\/$/, '');
+
+                // Only smooth scroll if on the same page
+                if (targetPath === '' || targetPath === currentPath) {
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // Using manual animation for maximum smoothness
+                        smoothScroll(targetId, 500); // 500ms for faster feel
+
+                        // Update active state in navbar if applicable
+                        navLinks.forEach(l => {
+                            l.classList.remove('active');
+                            if (l.getAttribute('href').includes('#' + targetId)) {
+                                l.classList.add('active');
+                            }
+                        });
+
+                        // Close mobile menu if clicked from navbar
+                        if (window.innerWidth < 992 && this.classList.contains('nav-link')) {
+                            navbarMenu.classList.remove('show');
+                            toggler.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                } else {
+                    // Regular link to another page - still close menu on mobile
+                    if (window.innerWidth < 992 && this.classList.contains('nav-link')) {
+                        navbarMenu.classList.remove('show');
+                        toggler.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+
+        // ScrollSpy logic
+        const sections = ['warta', 'jadwal', 'pengumuman', 'tentang'];
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            // Check if we are at the top
+            if (window.scrollY < 100) {
+                current = 'home';
+            } else {
+                sections.forEach(section => {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const sectionTop = element.offsetTop;
+                        const sectionHeight = element.clientHeight;
+                        if (window.scrollY >= (sectionTop - 150)) {
+                            current = section;
+                        }
+                    }
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (current === 'home' && (href === '{{ route("home") }}' || href === '/')) {
+                    link.classList.add('active');
+                } else if (current !== '' && href.includes('#' + current)) {
+                    link.classList.add('active');
                 }
             });
         });
