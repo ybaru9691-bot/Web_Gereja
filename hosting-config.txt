@@ -1,0 +1,35 @@
+APP_NAME="Gereja Bethania"
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+APP_URL=https://website-anda.com
+
+APP_LOCALE=id
+APP_FALLBACK_LOCALE=en
+APP_FAKER_LOCALE=id_ID
+
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_db_hosting
+DB_USERNAME=user_db_hosting
+DB_PASSWORD=pass_db_hosting
+
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+FILESYSTEM_DISK=public
+QUEUE_CONNECTION=sync
+
+# Email (Optional, sesuaikan jika ada SMTP hosting)
+MAIL_MAILER=smtp
+MAIL_HOST=mail.website-anda.com
+MAIL_PORT=465
+MAIL_USERNAME=admin@website-anda.com
+MAIL_PASSWORD=password_email
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS="admin@website-anda.com"
+MAIL_FROM_NAME="${APP_NAME}"

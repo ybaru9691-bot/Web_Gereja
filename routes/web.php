@@ -119,7 +119,7 @@ Route::get('/contact', function () {
 
 
 /* ================= DASHBOARD ================= */
-Route::get('/admin/dashboard', function () {
+Route::middleware(['auth'])->get('/admin/dashboard', function () {
     $wartaCount = Warta::count();
     $jemaatCount = \App\Models\Jemaat::count();
 
@@ -159,7 +159,7 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard.index', compact('wartaCount', 'jemaatCount', 'chartData', 'weeklyScanCount', 'pagiCount', 'siangCount', 'currentDay'));
 })->name('admin.dashboard');
 
-Route::get('/admin/dashboard/scan-by-day', function (Illuminate\Http\Request $request) {
+Route::middleware(['auth'])->get('/admin/dashboard/scan-by-day', function (Illuminate\Http\Request $request) {
     $day = $request->query('day');
     $dayNames = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
     if (!in_array($day, $dayNames)) {
@@ -199,7 +199,7 @@ Route::get('/admin/dashboard/scan-by-day', function (Illuminate\Http\Request $re
     ]);
 })->name('admin.dashboard.scanByDay');
 
-Route::get('/pendeta/dashboard', function () {
+Route::middleware(['auth'])->get('/pendeta/dashboard', function () {
     $wartaCount = \App\Models\Warta::count();
     $pengumumanCount = \App\Models\Pengumuman::count();
     $jemaatCount = \App\Models\Jemaat::count();
@@ -246,7 +246,7 @@ Route::get('/pendeta/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/jemaat', [JemaatController::class, 'index']);
     Route::get('/jemaat/create', [JemaatController::class, 'create']);
@@ -331,14 +331,14 @@ Route::get('/scan/{uuid_jadwal}', [ScanController::class, 'scan'])
 | PENDETA
 |--------------------------------------------------------------------------
 */
-Route::get('/pendeta/keuangan', [PendetaKeuanganController::class, 'index'])
+Route::middleware(['auth'])->get('/pendeta/keuangan', [PendetaKeuanganController::class, 'index'])
     ->name('pendeta.keuangan');
 
 
 
 
 
-Route::prefix('pendeta')->group(function () {
+Route::middleware(['auth'])->prefix('pendeta')->group(function () {
     Route::get('/pengumuman', [PendetaPengumumanController::class, 'index'])->name('pendeta.pengumuman');
     Route::get('/pengumuman/create', [PendetaPengumumanController::class, 'create']);
     Route::post('/pengumuman', [PendetaPengumumanController::class, 'store']);

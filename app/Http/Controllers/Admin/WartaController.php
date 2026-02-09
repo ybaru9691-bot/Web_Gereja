@@ -159,6 +159,23 @@ $warta->update([
         $firstFoto = $warta->fotos()->first();
         $warta->update(['file_path' => $firstFoto ? $firstFoto->nama_file : null]);
 
+        // 🔥 REGENERATE QR CODE (Agar URL mengikuti hosting, bukan localhost)
+        $url = route('warta.show', ['id' => $warta->warta_id]);
+        $qrName = 'qr-warta-' . $warta->warta_id . '.png';
+
+        $result = new Builder(
+            writer: new PngWriter(),
+            data: $url,
+            size: 300,
+            margin: 10
+        );
+
+        Storage::disk('public')->put('qr/' . $qrName, $result->build()->getString());
+        
+        $warta->update([
+            'qr_code' => 'qr/' . $qrName
+        ]);
+
         return redirect('/admin/warta')
             ->with('success', 'Warta berhasil diperbarui');
     }
